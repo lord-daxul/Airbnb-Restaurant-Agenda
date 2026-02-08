@@ -15,6 +15,8 @@ import LocalCafeIcon from '@material-ui/icons/LocalCafe';
 import GroupIcon from '@material-ui/icons/Group';
 import EventIcon from '@material-ui/icons/Event';
 import SpaIcon from '@material-ui/icons/Spa';
+import RoomIcon from '@material-ui/icons/Room';
+import TuneIcon from '@material-ui/icons/Tune';
 
 function Header() {
     const { t, lang, setLang } = useTranslation();
@@ -57,6 +59,37 @@ function Header() {
                                     </div>
                                 );
                             })}
+                        </div>
+
+                        {/* Mobile header: location + compact search + avatar */}
+                        <div className="mobile-header">
+                            <div className="mobile-header__top">
+                                <div className="mobile-location">
+                                    <RoomIcon className="mobile-location__icon" />
+                                    <div className="mobile-location__text">
+                                        <div className="mobile-location__label">Ubicación actual</div>
+                                        <div className="mobile-location__place">Libertador, Distrito Capital</div>
+                                    </div>
+                                </div>
+                                <div className="mobile-avatar">
+                                    <Avatar onClick={() => setMenuOpen(!menuOpen)} style={{ cursor: 'pointer', width:36, height:36 }} />
+                                </div>
+                            </div>
+
+                            <div className="mobile-search">
+                                <div className="mobile-search__input">
+                                    <SearchIcon />
+                                    <input placeholder={t('search.placeholder')} />
+                                </div>
+                                <TuneIcon className="mobile-search__filter" />
+                            </div>
+
+                            <div className="mobile-categories">
+                                <div className="chip active">{t('home.entire_homes')}</div>
+                                <div className="chip">{t('category.restaurant')}</div>
+                                <div className="chip">{t('category.cafe')}</div>
+                                <div className="chip">{t('category.family')}</div>
+                            </div>
                         </div>
            
             <div className='header__center'>
