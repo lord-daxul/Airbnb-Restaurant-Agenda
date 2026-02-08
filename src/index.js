@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { I18nProvider } from './i18n';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <React.StrictMode>
+      <I18nProvider>
+        <App />
+      </I18nProvider>
+    </React.StrictMode>,
   document.getElementById('root')
 );
 

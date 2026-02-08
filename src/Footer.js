@@ -1,14 +1,15 @@
 import React from "react";
 import "./Footer.css";
+import { useTranslation } from './i18n';
 
 function Footer() {
+  const { t } = useTranslation();
   return (
     <div className="footer">
       <p>
-        © 2020 Airbnb clone! No rights reserved - This is created by ❤️ Pushpendra
-        Singh!
+        {t('footer.credit')}
       </p>
-      <p>Privacy · Terms · Sitemap · Company Details</p>
+      <p>{t('footer.links')}</p>
     </div>
   );
 }

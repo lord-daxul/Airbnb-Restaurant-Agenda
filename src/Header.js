@@ -5,8 +5,10 @@ import LanguageIcon from "@material-ui/icons/Language";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Avatar } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { useTranslation } from './i18n';
 
 function Header() {
+    const { t } = useTranslation();
     return (
         <div className='header'>
             <Link to='/'>
@@ -18,13 +20,22 @@ function Header() {
             </Link>
            
             <div className='header__center'>
-                <input type="text" />
+                <input type="text" placeholder={t('search.placeholder')} />
                 <SearchIcon />
             </div>
 
             <div className='header__right'>
-                <p>Become a host</p>
+                <p>{t('header.become_host')}</p>
                 <LanguageIcon />
+                <select
+                    value={lang}
+                    onChange={(e) => setLang(e.target.value)}
+                    aria-label="language-select"
+                    style={{ margin: '0 8px' }}
+                >
+                    <option value="en">EN</option>
+                    <option value="es">ES</option>
+                </select>
                 <ExpandMoreIcon />
                 <Avatar />
             </div>

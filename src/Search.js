@@ -6,10 +6,12 @@ import { DateRangePicker } from "react-date-range";
 import { Button } from "@material-ui/core";
 import PeopleIcon from "@material-ui/icons/People";
 import { useHistory } from "react-router-dom";
+import { useTranslation } from './i18n';
 
 // DATE PICKER COMPONENT
 function Search() {
     const history = useHistory();
+    const { t } = useTranslation();
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
 
@@ -28,10 +30,10 @@ function Search() {
         <div className='search'>
             <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} />
             <h2>
-                Number of guests <PeopleIcon />
+                {t('search.guests')} <PeopleIcon />
             </h2>
             <input min={0} defaultValue={2} type="number" />
-            <Button onClick={() => history.push('/search')}>Search Airbnb</Button>
+            <Button onClick={() => history.push('/search')}>{t('search.button')}</Button>
         </div>
     )
 }
