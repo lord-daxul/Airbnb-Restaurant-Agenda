@@ -10,9 +10,9 @@ import HomeIcon from '@material-ui/icons/Home';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import PersonIcon from '@material-ui/icons/Person';
-import RestaurantIcon from '@material-ui/icons/Restaurant';
+import LocalDiningIcon from '@material-ui/icons/LocalDining';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
-import FamilyRestroomIcon from '@material-ui/icons/FamilyRestroom';
+import GroupIcon from '@material-ui/icons/Group';
 import EventIcon from '@material-ui/icons/Event';
 import SpaIcon from '@material-ui/icons/Spa';
 
@@ -30,9 +30,9 @@ function Header() {
         }, []);
 
         const categories = [
-            { key: 'restaurant', label: 'category.restaurant', Icon: RestaurantIcon },
+            { key: 'restaurant', label: 'category.restaurant', Icon: LocalDiningIcon },
             { key: 'cafe', label: 'category.cafe', Icon: LocalCafeIcon },
-            { key: 'family', label: 'category.family', Icon: FamilyRestroomIcon },
+            { key: 'family', label: 'category.family', Icon: GroupIcon },
             { key: 'event', label: 'category.event', Icon: EventIcon },
             { key: 'salon', label: 'category.salon', Icon: SpaIcon }
         ];
