@@ -10,6 +10,22 @@ export async function fetchListings() {
   return request('listings');
 }
 
+export async function fetchRestaurants() { return request('restaurants'); }
+export async function fetchRestaurant(id) { return request(`restaurants?id=${id}`); }
+export async function fetchTables(restaurantId) { return request(`tables?restaurantId=${restaurantId}`); }
+
+export async function fetchBookings(params = {}) {
+  const qs = new URLSearchParams(params).toString();
+  return request(`bookings${qs ? ('?' + qs) : ''}`);
+}
+
+export async function createBooking(body) {
+  return request('bookings', { method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } });
+}
+
+export async function fetchFavorites(userId) { return request(`favorites?userId=${userId}`); }
+export async function toggleFavorite(body) { return request('favorites', { method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } }); }
+
 export async function login({ email, password }) {
   return request('login', { method: 'POST', body: JSON.stringify({ email, password }), headers: { 'Content-Type': 'application/json' } });
 }
@@ -18,4 +34,4 @@ export async function register(user) {
   return request('register', { method: 'POST', body: JSON.stringify(user), headers: { 'Content-Type': 'application/json' } });
 }
 
-export default { fetchListings, login, register };
+export default { fetchListings, fetchRestaurants, fetchRestaurant, fetchTables, fetchBookings, createBooking, fetchFavorites, toggleFavorite, login, register };

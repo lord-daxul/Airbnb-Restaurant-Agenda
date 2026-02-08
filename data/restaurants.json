@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "name": "La Casa Bistró",
+    "rating": 4.8,
+    "address": {
+      "state": "Distrito Capital",
+      "city": "Caracas",
+      "address": "Av. Urdaneta, Edif. Bistró 23",
+      "phone": "0212-5551234"
+    }
+  },
+  {
+    "id": 2,
+    "name": "El Mesón de la Cava",
+    "rating": 4.9,
+    "address": {
+      "state": "Miranda",
+      "city": "Los Teques",
+      "address": "Calle Real 45",
+      "phone": "0212-5559876"
+    }
+  }
+]

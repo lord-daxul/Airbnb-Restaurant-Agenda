@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "restaurantId": 1,
+    "tableId": 1,
+    "start": "2026-02-10T18:00:00.000Z",
+    "end": "2026-02-10T20:00:00.000Z",
+    "seatsBooked": 2,
+    "pricePerSeat": 12,
+    "total": 24,
+    "status": "confirmed"
+  }
+]
