@@ -10,6 +10,11 @@ import HomeIcon from '@material-ui/icons/Home';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import PersonIcon from '@material-ui/icons/Person';
+import RestaurantIcon from '@material-ui/icons/Restaurant';
+import LocalCafeIcon from '@material-ui/icons/LocalCafe';
+import FamilyRestroomIcon from '@material-ui/icons/FamilyRestroom';
+import EventIcon from '@material-ui/icons/Event';
+import SpaIcon from '@material-ui/icons/Spa';
 
 function Header() {
     const { t, lang, setLang } = useTranslation();
@@ -23,6 +28,14 @@ function Header() {
             document.addEventListener('click', handleClick);
             return () => document.removeEventListener('click', handleClick);
         }, []);
+
+        const categories = [
+            { key: 'restaurant', label: 'category.restaurant', Icon: RestaurantIcon },
+            { key: 'cafe', label: 'category.cafe', Icon: LocalCafeIcon },
+            { key: 'family', label: 'category.family', Icon: FamilyRestroomIcon },
+            { key: 'event', label: 'category.event', Icon: EventIcon },
+            { key: 'salon', label: 'category.salon', Icon: SpaIcon }
+        ];
     return (
         <div className='header'>
             <Link to='/'>
@@ -32,6 +45,19 @@ function Header() {
                     alt=""
                 />
             </Link>
+
+                        {/* Desktop categories row */}
+                        <div className="header__categories">
+                            {categories.map(c => {
+                                const Icon = c.Icon;
+                                return (
+                                    <div key={c.key} className="header__category">
+                                        <Icon className="header__categoryIcon" />
+                                        <div className="header__categoryLabel">{t(c.label)}</div>
+                                    </div>
+                                );
+                            })}
+                        </div>
            
             <div className='header__center'>
                 <input type="text" placeholder={t('search.placeholder')} />

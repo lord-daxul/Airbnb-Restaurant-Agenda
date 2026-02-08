@@ -81,6 +81,13 @@ const translations = {
     'auth.create_account': 'Create account',
     'auth.new_here': 'New here?',
     'auth.already_have': 'Already have an account?'
+    ,
+    // Categories
+    'category.restaurant': 'Restaurant',
+    'category.cafe': 'Cafe',
+    'category.family': 'Family',
+    'category.event': 'Event',
+    'category.salon': 'Salon'
   },
   es: {
     'header.become_host': 'Registrar Local',
@@ -168,6 +175,13 @@ const translations = {
     'auth.create_account': 'Crear cuenta',
     'auth.new_here': '¿Nuevo aquí?',
     'auth.already_have': '¿Ya tienes cuenta?'
+    ,
+    // Categories
+    'category.restaurant': 'Restaurante',
+    'category.cafe': 'Café',
+    'category.family': 'Familiar',
+    'category.event': 'Evento',
+    'category.salon': 'Salón'
   }
 };
 

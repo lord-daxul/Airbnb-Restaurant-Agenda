@@ -69,3 +69,25 @@
 @media (max-width: 720px) {
   .avatar-menu { right: 8px; left: 8px; top: auto; bottom: 74px; border-radius: 12px; }
 }
+
+/* Categories row (desktop only) */
+.header__categories {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.header__category { display:flex; flex-direction:column; align-items:center; color:#666; font-size:13px; }
+.header__categoryIcon { font-size:28px; color:#ff6600; }
+.header__categoryLabel { margin-top:6px; }
+
+@media (max-width: 720px) {
+  .header__categories { display: none; }
+}
+
+/* Make search center wider on desktop */
+@media (min-width: 720px) {
+  .header__center { max-width: 720px; margin: 12px auto; }
+  .header { padding: 8px 24px; }
+}
