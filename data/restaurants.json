@@ -21,4 +21,19 @@
       "phone": "0212-5559876"
     }
   }
+  ,
+  {
+    "id": 3,
+    "name": "Vista al Lago",
+    "rating": 4.7,
+    "priceRange": "$$$",
+    "description": "Cena romántica con vista al lago. Especialidad en mariscos y cócteles de autor.",
+    "hours": "10:00 AM - 10:00 PM",
+    "address": {
+      "state": "Zulia",
+      "city": "Maracaibo",
+      "address": "Av. Lago 12",
+      "phone": "0261-5550000"
+    }
+  }
 ]

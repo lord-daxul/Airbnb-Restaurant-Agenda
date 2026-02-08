@@ -24,6 +24,15 @@ function RestaurantPanel() {
       <div className="panel-card">
         <h3>{restaurant.name}</h3>
         <div><strong>Rating:</strong> {restaurant.rating}</div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <div><strong>Rating:</strong> {restaurant.rating}</div>
+              {restaurant.priceRange && <div><strong>Precio:</strong> {restaurant.priceRange}</div>}
+            </div>
+            {restaurant.rating && <div style={{ background: '#fff3ea', padding: '6px 10px', borderRadius: 8, color: '#ff6600' }}>{restaurant.rating}</div>}
+          </div>
+          {restaurant.description && <div style={{ marginTop: 12 }}><h4>Descripción</h4><p>{restaurant.description}</p></div>}
+          {restaurant.hours && <div style={{ marginTop: 12 }}><h4>Horario</h4><p>{restaurant.hours}</p></div>}
       </div>
     );
   }
