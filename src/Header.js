@@ -26,6 +26,12 @@ function Header() {
 
             <div className='header__right'>
                 <p>{t('header.become_host')}</p>
+                <Link to="/register" style={{ textDecoration: 'none', color: 'inherit', margin: '0 8px' }}>
+                  <p>Register</p>
+                </Link>
+                <Link to="/login" style={{ textDecoration: 'none', color: 'inherit', margin: '0 8px' }}>
+                  <p>Login</p>
+                </Link>
                 <LanguageIcon />
                 <select
                     value={lang}

@@ -4,6 +4,8 @@ import Home from './Home'
 import Header from './Header'
 import Footer from './Footer'
 import SearchPage from './SearchPage'
+import Login from './Login'
+import Register from './Register'
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -16,6 +18,12 @@ function App() {
         <Header />
         
         <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
           <Route path="/search">
             <SearchPage />
           </Route>
