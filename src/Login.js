@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Auth.css';
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from './i18n';
+import api from './services/api';
 
 function Login() {
   const history = useHistory();
@@ -11,9 +12,16 @@ function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // Mock login - no backend
-    alert(`Mock login for ${email}`);
-    history.push('/');
+    // Call demo API
+    api.login({ email, password }).then(res => {
+      if (res && res.token) {
+        localStorage.setItem('demo_token', res.token);
+        localStorage.setItem('demo_user', JSON.stringify(res.user));
+        history.push('/');
+      } else {
+        alert(res && res.error ? res.error : 'Login failed');
+      }
+    }).catch(err => alert(err.message || 'Login error'));
   }
 
   return (

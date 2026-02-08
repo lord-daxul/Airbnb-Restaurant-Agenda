@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "La Casa Bistró",
+    "location": "Libertador, Distrito Capital",
+    "description": "Cocina venezolana contemporánea con ingredientes locales frescos.",
+    "price": 30,
+    "rating": 4.8
+  },
+  {
+    "id": 2,
+    "title": "El Mesón de la Cava",
+    "location": "Las Mercedes, Caracas",
+    "description": "Carta amplia y selección de vinos.",
+    "price": 55,
+    "rating": 4.9
+  }
+]

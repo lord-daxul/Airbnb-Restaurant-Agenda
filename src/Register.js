@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Auth.css';
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from './i18n';
+import api from './services/api';
 
 function Register() {
   const history = useHistory();
@@ -12,9 +13,15 @@ function Register() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // Mock register - no backend
-    alert(`Mock register for ${name} <${email}>`);
-    history.push('/login');
+    api.register({ name, lastname, email, password, phone, state, municipality })
+      .then(res => {
+        if (res && res.user) {
+          alert('Registro simulado OK');
+          history.push('/login');
+        } else {
+          alert(res && res.error ? res.error : 'Register failed');
+        }
+      }).catch(err => alert(err.message || 'Register error'));
   }
 
   return (
