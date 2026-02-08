@@ -9,6 +9,9 @@ import Register from './Register'
 import Orders from './Orders'
 import Visited from './Visited'
 import Profile from './Profile'
+import UserPanel from './panels/UserPanel'
+import RestaurantPanel from './panels/RestaurantPanel'
+import AdminPanel from './panels/AdminPanel'
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -38,6 +41,15 @@ function App() {
           </Route>
           <Route path="/profile">
             <Profile />
+          </Route>
+          <Route path="/panel/user">
+            <UserPanel />
+          </Route>
+          <Route path="/panel/restaurant/:id">
+            <RestaurantPanel />
+          </Route>
+          <Route path="/panel/admin">
+            <AdminPanel />
           </Route>
           <Route path="/">
             <Home />

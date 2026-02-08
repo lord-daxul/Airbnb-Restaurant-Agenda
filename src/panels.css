@@ -1,0 +1,9 @@
+.panel-root { padding: 20px; }
+.panel-tabs { display:flex; gap:8px; margin:12px 0 18px 0; }
+.panel-tabs button { padding:8px 12px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer }
+.panel-tabs button.active { background:#ff6600; color:#fff; border-color: #ff6600 }
+.panel-body { margin-top: 12px; }
+.panel-card { background: #fff; padding:16px; border-radius:8px; box-shadow: 0 6px 18px rgba(0,0,0,0.04); }
+.simple-table { width:100%; border-collapse: collapse; }
+.simple-table th, .simple-table td { padding:8px 10px; border-bottom:1px solid #eee; text-align:left }
+.panel-grid { display:flex; gap:12px; align-items:flex-start }
