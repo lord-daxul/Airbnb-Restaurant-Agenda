@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from './i18n';
 
 function Header() {
-    const { t } = useTranslation();
+    const { t, lang, setLang } = useTranslation();
     return (
         <div className='header'>
             <Link to='/'>
