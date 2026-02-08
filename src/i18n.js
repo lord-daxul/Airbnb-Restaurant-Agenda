@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from 'react';
 
 const translations = {
   en: {
-    'header.become_host': 'Become a host',
+    'header.become_host': 'Register Local',
     'search.placeholder': 'Search',
     'banner.hide': 'Hide',
     'banner.search_dates': 'Search Dates',
@@ -62,17 +62,28 @@ const translations = {
     'listing.5.total': '$450 total (estimate for 8)',
     'listing.6.location': 'El Hatillo, Caracas',
     'listing.6.title': 'The Blue Room — Café & Wine Bar',
-    'listing.6.description': 'Cozy evening spot · Small plates · Wine selection',
-    'listing.6.price': '$65 / person',
-    'listing.6.total': '$480 total (estimate for 6)',
-    'listing.7.location': 'Sabana Grande, Caracas',
-    'listing.7.title': '5-Star Fine Dining Experience',
+      'footer.menu.home': 'Home',
+      'footer.menu.orders': 'Orders',
+      'footer.menu.search': 'Search',
+      'footer.menu.visited': 'Visited',
+      'footer.menu.profile': 'Profile',
     'listing.7.description': 'Chef’s tasting menu · Wine pairings · Private service',
     'listing.7.price': '$90 / person',
     'listing.7.total': '$650 total (estimate for 8)'
+    ,
+    // Auth strings
+    'auth.login': 'Login',
+    'auth.register': 'Register',
+    'auth.email': 'Email',
+    'auth.password': 'Password',
+    'auth.name': 'Name',
+    'auth.signin': 'Sign in',
+    'auth.create_account': 'Create account',
+    'auth.new_here': 'New here?',
+    'auth.already_have': 'Already have an account?'
   },
   es: {
-    'header.become_host': 'Conviértete en anfitrión',
+    'header.become_host': 'Registrar Local',
     'search.placeholder': 'Buscar',
     'banner.hide': 'Ocultar',
     'banner.search_dates': 'Buscar fechas',
@@ -140,6 +151,23 @@ const translations = {
     'listing.7.description': 'Menú degustación del chef · Maridaje de vinos · Servicio privado',
     'listing.7.price': '$90 / persona',
     'listing.7.total': '$650 total (estimado para 8)'
+    ,
+    // Footer / menu
+    'footer.menu.home': 'Inicio',
+    'footer.menu.orders': 'Pedidos',
+    'footer.menu.search': 'Buscar',
+    'footer.menu.visited': 'Visitados',
+    'footer.menu.profile': 'Perfil',
+    // Auth strings
+    'auth.login': 'Iniciar sesión',
+    'auth.register': 'Registrarse',
+    'auth.email': 'Correo electrónico',
+    'auth.password': 'Contraseña',
+    'auth.name': 'Nombre',
+    'auth.signin': 'Iniciar sesión',
+    'auth.create_account': 'Crear cuenta',
+    'auth.new_here': '¿Nuevo aquí?',
+    'auth.already_have': '¿Ya tienes cuenta?'
   }
 };
 

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './Auth.css';
 import { Link, useHistory } from 'react-router-dom';
+import { useTranslation } from './i18n';
 
 function Login() {
   const history = useHistory();
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -17,20 +19,20 @@ function Login() {
   return (
     <div className="auth">
       <div className="auth__container">
-        <h2>Login</h2>
+        <h2>{t('auth.login')}</h2>
         <form onSubmit={handleSubmit} className="auth__form">
           <label>
-            Email
+            {t('auth.email')}
             <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
           </label>
           <label>
-            Password
+            {t('auth.password')}
             <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
           </label>
-          <button type="submit" className="auth__btn">Sign in</button>
+          <button type="submit" className="auth__btn">{t('auth.signin')}</button>
         </form>
         <p>
-          New here? <Link to="/register">Create an account</Link>
+          {t('auth.new_here')} <Link to="/register">{t('auth.create_account')}</Link>
         </p>
       </div>
     </div>

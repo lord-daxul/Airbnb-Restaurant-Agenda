@@ -6,6 +6,9 @@ import Footer from './Footer'
 import SearchPage from './SearchPage'
 import Login from './Login'
 import Register from './Register'
+import Orders from './Orders'
+import Visited from './Visited'
+import Profile from './Profile'
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -26,6 +29,15 @@ function App() {
           </Route>
           <Route path="/search">
             <SearchPage />
+          </Route>
+          <Route path="/orders">
+            <Orders />
+          </Route>
+          <Route path="/visited">
+            <Visited />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
           <Route path="/">
             <Home />

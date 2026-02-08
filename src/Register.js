@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './Auth.css';
 import { Link, useHistory } from 'react-router-dom';
+import { useTranslation } from './i18n';
 
 function Register() {
   const history = useHistory();
+  const { t } = useTranslation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,24 +20,24 @@ function Register() {
   return (
     <div className="auth">
       <div className="auth__container">
-        <h2>Register</h2>
+        <h2>{t('auth.register')}</h2>
         <form onSubmit={handleSubmit} className="auth__form">
           <label>
-            Name
+            {t('auth.name')}
             <input value={name} onChange={e => setName(e.target.value)} required />
           </label>
           <label>
-            Email
+            {t('auth.email')}
             <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
           </label>
           <label>
-            Password
+            {t('auth.password')}
             <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
           </label>
-          <button type="submit" className="auth__btn">Create account</button>
+          <button type="submit" className="auth__btn">{t('auth.create_account')}</button>
         </form>
         <p>
-          Already have an account? <Link to="/login">Sign in</Link>
+          {t('auth.already_have')} <Link to="/login">{t('auth.signin')}</Link>
         </p>
       </div>
     </div>

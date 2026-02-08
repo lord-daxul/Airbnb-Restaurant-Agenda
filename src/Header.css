@@ -40,3 +40,32 @@
   width: 15vw;
   margin-right: 80px;
 }
+
+.avatar-wrapper { position: relative; }
+.avatar-menu {
+  position: absolute;
+  right: 0;
+  top: 48px;
+  background: white;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  border-radius: 8px;
+  min-width: 180px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+}
+.avatar-menu__item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  color: #333;
+  text-decoration: none;
+}
+.avatar-menu__item span { margin-left: 8px; }
+.avatar-menu__item:hover { background: #fafafa; }
+
+/* On small screens, avatar menu should be centered modal-like */
+@media (max-width: 720px) {
+  .avatar-menu { right: 8px; left: 8px; top: auto; bottom: 74px; border-radius: 12px; }
+}
