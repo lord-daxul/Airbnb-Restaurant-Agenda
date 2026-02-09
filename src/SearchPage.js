@@ -3,7 +3,7 @@ import './SearchPage.css';
 import { Button } from "@material-ui/core";
 import SearchResult from "./SearchResult";
 import { useTranslation } from './i18n';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import restaurantsJson from './data/restaurants.json';
 import restaurantsJs from './data/restaurants.js';
 import listingsData from './data/listings.json';
@@ -114,19 +114,23 @@ function SearchPage() {
                 <p className="searchPage__empty">{t('search.noResults') || 'No se encontraron resultados'}</p>
             )}
 
-            {filtered.map(item => (
-                <SearchResult
-                    key={item.id}
-                    img={item.img || '/images/placeholder.png'}
-                    location={item.location}
-                    title={item.title}
-                    description={item.description}
-                    star={item.star}
-                    price={item.price}
-                    rawType={item.rawType}
-                    origId={item.origId}
-                />
-            ))}
+            {filtered.map(item => {
+                const to = item.rawType === 'listing' ? `/listing/${item.origId}` : `/restaurant/${item.origId}`
+                return (
+                    <Link key={item.id} to={to} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <SearchResult
+                            img={item.img || '/images/placeholder.png'}
+                            location={item.location}
+                            title={item.title}
+                            description={item.description}
+                            star={item.star}
+                            price={item.price}
+                            rawType={item.rawType}
+                            origId={item.origId}
+                        />
+                    </Link>
+                )
+            })}
         </div>
     )
 }
