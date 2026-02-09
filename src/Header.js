@@ -41,6 +41,8 @@ function Header() {
     const [whatOpen, setWhatOpen] = useState(false);
     const [selectedListing, setSelectedListing] = useState(categories[0].key);
     const [location, setLocation] = useState('Caracas');
+    const [showCityMenu, setShowCityMenu] = useState(false);
+    const demoCities = ['Caracas', 'Bogota', 'Maracaibo'];
     const searchRef = useRef(null);
     const history = useHistory();
 
@@ -208,9 +210,28 @@ function Header() {
 
                     <div className="search-part where">
                         <div className="search-label">{t('search.where')}</div>
-                        <div className="where-input">
+                        <div
+                            className="where-input"
+                            onMouseEnter={() => setShowCityMenu(true)}
+                            onMouseLeave={() => setShowCityMenu(false)}
+                        >
                             <RoomIcon className="where-icon" onClick={detectCity} style={{ cursor: 'pointer' }} title="Detectar ciudad" />
-                            <input value={location} onChange={e=>setLocation(e.target.value)} onKeyDown={e=>{ if(e.key==='Enter') doSearch(); }} />
+                            <input
+                                value={location}
+                                onChange={e=>setLocation(e.target.value)}
+                                onKeyDown={e=>{ if(e.key==='Enter') doSearch(); }}
+                                onFocus={() => setShowCityMenu(true)}
+                                onBlur={() => setTimeout(()=>setShowCityMenu(false), 120)}
+                            />
+                            {showCityMenu && (
+                                <div className="city-dropdown">
+                                    {demoCities.map(c => (
+                                        <div key={c} className="city-item" onMouseDown={() => { setLocation(c); setShowCityMenu(false); }}>
+                                            {c}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
 
