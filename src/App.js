@@ -21,6 +21,7 @@ import MockReservationsCurrent from './mocks/MockReservationsCurrent'
 import RestaurantPage from './RestaurantPage'
 import RestaurantDemo from './RestaurantDemo'
 import CategoryPage from './CategoryPage'
+import ListingPage from './ListingPage'
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -66,6 +67,9 @@ function App() {
           </Route>
           <Route path="/restaurant/:id">
             <RestaurantPage />
+          </Route>
+          <Route path="/listing/:id">
+            <ListingPage />
           </Route>
           <Route path="/restaurant/demo">
             <RestaurantDemo />

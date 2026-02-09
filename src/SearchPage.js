@@ -27,6 +27,7 @@ function SearchPage() {
         // Normalize restaurants
         const fromRestaurants = (restaurantsData || []).map(r => ({
             id: `r-${r.id}`,
+            origId: r.id,
             img: r.cover || '',
             // keep raw address pieces for more robust matching
             addressCity: r.address && r.address.city ? r.address.city : '',
@@ -45,6 +46,7 @@ function SearchPage() {
         // Normalize listings (older format)
         const fromListings = (listingsData || []).map(l => ({
             id: `l-${l.id}`,
+            origId: l.id,
             img: l.img || '',
             location: l.location || '',
             title: l.title || l.name || '',
@@ -116,6 +118,8 @@ function SearchPage() {
                     description={item.description}
                     star={item.star}
                     price={item.price}
+                    rawType={item.rawType}
+                    origId={item.origId}
                 />
             ))}
         </div>

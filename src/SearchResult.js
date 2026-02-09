@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './SearchResult.css';
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import StarIcon from "@material-ui/icons/Star";
@@ -12,6 +13,8 @@ function SearchResult({
     price,
     total,
     partySize = 2,
+    rawType = 'restaurant',
+    origId = null,
 }) {
     // price can be:
     // - a preformatted string (i18n)
@@ -39,32 +42,36 @@ function SearchResult({
         totalDisplay = total || '';
     }
 
+    const to = rawType === 'listing' ? `/listing/${origId}` : `/restaurant/${origId}`;
+
     return (
         <div className='searchResult'>
             <img src={img} alt="" />
             <FavoriteBorderIcon className="searchResult__heart" />
 
-            <div className='searchResult__info'>
-                <div className="searchResult__infoTop">
-                    <p>{location}</p>
-                    <h3>{title}</h3>
-                    <p>____</p>
-                    <p>{description}</p>
-                </div>
+            <Link to={to} style={{ textDecoration: 'none', color: 'inherit', flex: 1 }}>
+                <div className='searchResult__info'>
+                    <div className="searchResult__infoTop">
+                        <p>{location}</p>
+                        <h3>{title}</h3>
+                        <p>____</p>
+                        <p>{description}</p>
+                    </div>
 
-                <div className="searchResult__infoBottom">
-                    <div className="searchResult__stars">
-                        <StarIcon className="searchResult__star" />
-                        <p>
-                            <strong>{star}</strong>
-                        </p>
-                    </div>
-                    <div className='searchResults__price'>
-                        <h2>{priceDisplay}</h2>
-                        <p>{totalDisplay}</p>
+                    <div className="searchResult__infoBottom">
+                        <div className="searchResult__stars">
+                            <StarIcon className="searchResult__star" />
+                            <p>
+                                <strong>{star}</strong>
+                            </p>
+                        </div>
+                        <div className='searchResults__price'>
+                            <h2>{priceDisplay}</h2>
+                            <p>{totalDisplay}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Link>
         </div>
     )
 }
