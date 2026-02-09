@@ -12,9 +12,9 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "date-fns": "^2.15.0",
-    "react": "^24.0.0",
+    "react": "^19.2.4",
     "react-date-range": "^1.0.3",
-    "react-dom": "^24.0.0",
+    "react-dom": "^19.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.1"
   },
