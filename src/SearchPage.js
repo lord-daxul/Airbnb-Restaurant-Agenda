@@ -43,16 +43,21 @@ function SearchPage() {
             rawType: 'restaurant'
         }));
 
-        // Normalize listings (older format)
+        // Normalize listings (older or repo format) and include address fields
         const fromListings = (listingsData || []).map(l => ({
             id: `l-${l.id}`,
             origId: l.id,
-            img: l.img || '',
-            location: l.location || '',
+            img: l.cover || l.img || '',
+            // keep raw address pieces for robust matching similar to restaurants
+            addressCity: (l.address && l.address.city) || '',
+            addressState: (l.address && l.address.state) || '',
+            addressStreet: (l.address && l.address.address) || '',
+            location: l.location || (l.address && l.address.city ? `${l.address.city}${l.address.state ? ', ' + l.address.state : ''}` : ''),
             title: l.title || l.name || '',
             description: l.description || '',
             star: l.rating || 0,
             price: l.price || null,
+            tags: Array.isArray(l.tags) ? l.tags : [],
             category: l.category || '',
             rawType: 'listing'
         }));
