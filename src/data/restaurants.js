@@ -11,7 +11,12 @@ const restaurants = [
     description: 'Cocina local con énfasis en carnes y opciones saludables.',
     hours: 'Lun-Sab 11:00 - 23:00',
     address: { address: 'Av. Principal, 12', city: 'Caracas', state: 'Distrito Capital' },
-    cover: '/images/restaurants/101.avif'
+    cover: '/images/restaurants/101.avif',
+    tables: [
+      { id: 1011, name: 'Mesa 1', seats: 2 },
+      { id: 1012, name: 'Mesa 2', seats: 4 },
+      { id: 1013, name: 'Mesa 3', seats: 6 }
+    ]
   },
   {
     id: 102,
@@ -24,7 +29,12 @@ const restaurants = [
     description: 'Mariscos y cortes selectos en ambiente elegante.',
     hours: 'Mar-Dom 12:00 - 22:30',
     address: { address: 'C.C. Central, Local 5', city: 'Caracas', state: 'Distrito Capital' },
-    cover: '/images/restaurants/102.avif'
+    cover: '/images/restaurants/102.avif',
+    tables: [
+      { id: 1021, name: 'Mesa 1', seats: 2 },
+      { id: 1022, name: 'Mesa 2', seats: 4 },
+      { id: 1023, name: 'Mesa 3', seats: 6 }
+    ]
   },
   {
     id: 103,
@@ -37,7 +47,12 @@ const restaurants = [
     description: 'Recetas tradicionales con ingredientes orgánicos.',
     hours: 'Todos los días 8:00 - 22:00',
     address: { address: 'Calle 7, Esquina', city: 'Caracas', state: 'Distrito Capital' },
-    cover: '/images/restaurants/103.avif'
+    cover: '/images/restaurants/103.avif',
+    tables: [
+      { id: 1031, name: 'Mesa 1', seats: 2 },
+      { id: 1032, name: 'Mesa 2', seats: 4 },
+      { id: 1033, name: 'Mesa 3', seats: 6 }
+    ]
   },
 
   // Café
@@ -53,6 +68,12 @@ const restaurants = [
     hours: 'Lun-Dom 7:00 - 20:00',
     address: { address: 'Plaza Café, Pb', city: 'Caracas', state: 'Distrito Capital' },
     cover: '/images/restaurants/201.avif'
+    ,
+    tables: [
+      { id: 2011, name: 'Mesa 1', seats: 2 },
+      { id: 2012, name: 'Mesa 2', seats: 4 },
+      { id: 2013, name: 'Mesa 3', seats: 6 }
+    ]
   },
   {
     id: 202,
@@ -66,6 +87,12 @@ const restaurants = [
     hours: 'Mar-Dom 8:00 - 18:00',
     address: { address: 'Av. Café 45', city: 'Caracas', state: 'Distrito Capital' },
     cover: '/images/restaurants/202.avif'
+    ,
+    tables: [
+      { id: 2021, name: 'Mesa 1', seats: 2 },
+      { id: 2022, name: 'Mesa 2', seats: 4 },
+      { id: 2023, name: 'Mesa 3', seats: 6 }
+    ]
   },
   {
     id: 203,
@@ -79,6 +106,12 @@ const restaurants = [
     hours: 'Todos los días 7:30 - 16:30',
     address: { address: 'Boulevard 3', city: 'Caracas', state: 'Distrito Capital' },
     cover: '/images/restaurants/203.avif'
+    ,
+    tables: [
+      { id: 2031, name: 'Mesa 1', seats: 2 },
+      { id: 2032, name: 'Mesa 2', seats: 4 },
+      { id: 2033, name: 'Mesa 3', seats: 6 }
+    ]
   },
 
   // Familiar
@@ -94,6 +127,12 @@ const restaurants = [
     hours: 'Lun-Dom 9:00 - 22:00',
     address: { address: 'Urbanización Las Flores', city: 'Caracas', state: 'Distrito Capital' },
     cover: '/images/restaurants/301.avif'
+    ,
+    tables: [
+      { id: 3011, name: 'Mesa 1', seats: 2 },
+      { id: 3012, name: 'Mesa 2', seats: 4 },
+      { id: 3013, name: 'Mesa 3', seats: 6 }
+    ]
   },
   {
     id: 302,
@@ -107,6 +146,12 @@ const restaurants = [
     hours: 'Todos los días 10:00 - 23:00',
     address: { address: 'Centro Comercial Patio', city: 'Caracas', state: 'Distrito Capital' },
     cover: '/images/restaurants/302.avif'
+    ,
+    tables: [
+      { id: 3021, name: 'Mesa 1', seats: 2 },
+      { id: 3022, name: 'Mesa 2', seats: 4 },
+      { id: 3023, name: 'Mesa 3', seats: 6 }
+    ]
   },
   {
     id: 303,
@@ -120,6 +165,12 @@ const restaurants = [
     hours: 'Lun-Sab 8:00 - 20:00',
     address: { address: 'Av. Principal 77', city: 'Caracas', state: 'Distrito Capital' },
     cover: '/images/restaurants/303.avif'
+    ,
+    tables: [
+      { id: 3031, name: 'Mesa 1', seats: 2 },
+      { id: 3032, name: 'Mesa 2', seats: 4 },
+      { id: 3033, name: 'Mesa 3', seats: 6 }
+    ]
   },
 
   // Evento
@@ -135,6 +186,12 @@ const restaurants = [
     hours: 'Bajo reserva',
     address: { address: 'Av. Los Próceres', city: 'Caracas', state: 'Distrito Capital' },
     cover: '/images/restaurants/401.avif'
+    ,
+    tables: [
+      { id: 4011, name: 'Mesa 1', seats: 4 },
+      { id: 4012, name: 'Mesa 2', seats: 8 },
+      { id: 4013, name: 'Mesa 3', seats: 12 }
+    ]
   },
   {
     id: 402,
@@ -148,6 +205,12 @@ const restaurants = [
     hours: 'Bajo reserva',
     address: { address: 'Edificio Central Piso 10', city: 'Caracas', state: 'Distrito Capital' },
     cover: '/images/restaurants/402.avif'
+    ,
+    tables: [
+      { id: 4021, name: 'Mesa 1', seats: 4 },
+      { id: 4022, name: 'Mesa 2', seats: 8 },
+      { id: 4023, name: 'Mesa 3', seats: 12 }
+    ]
   },
   {
     id: 403,
@@ -161,6 +224,12 @@ const restaurants = [
     hours: 'Bajo reserva',
     address: { address: 'Km 4 Carretera', city: 'Caracas', state: 'Distrito Capital' },
     cover: '/images/restaurants/403.avif'
+    ,
+    tables: [
+      { id: 4031, name: 'Mesa 1', seats: 4 },
+      { id: 4032, name: 'Mesa 2', seats: 8 },
+      { id: 4033, name: 'Mesa 3', seats: 12 }
+    ]
   },
 
   // Salón
@@ -176,6 +245,12 @@ const restaurants = [
     hours: 'Mar-Dom 9:00 - 19:00',
     address: { address: 'C.C. Salón, Local 2', city: 'Caracas', state: 'Distrito Capital' },
     cover: '/images/restaurants/501.avif'
+    ,
+    tables: [
+      { id: 5011, name: 'Mesa 1', seats: 2 },
+      { id: 5012, name: 'Mesa 2', seats: 4 },
+      { id: 5013, name: 'Mesa 3', seats: 6 }
+    ]
   },
   {
     id: 502,
@@ -189,6 +264,12 @@ const restaurants = [
     hours: 'Lun-Sab 10:00 - 20:00',
     address: { address: 'Zona Rosa', city: 'Caracas', state: 'Distrito Capital' },
     cover: '/images/restaurants/502.avif'
+    ,
+    tables: [
+      { id: 5021, name: 'Mesa 1', seats: 2 },
+      { id: 5022, name: 'Mesa 2', seats: 4 },
+      { id: 5023, name: 'Mesa 3', seats: 6 }
+    ]
   },
   {
     id: 503,
@@ -202,6 +283,12 @@ const restaurants = [
     hours: 'Lun-Vie 9:00 - 18:00',
     address: { address: 'Av. Estilo 21', city: 'Caracas', state: 'Distrito Capital' },
     cover: '/images/restaurants/503.avif'
+    ,
+    tables: [
+      { id: 5031, name: 'Mesa 1', seats: 2 },
+      { id: 5032, name: 'Mesa 2', seats: 4 },
+      { id: 5033, name: 'Mesa 3', seats: 6 }
+    ]
   }
 ]
 

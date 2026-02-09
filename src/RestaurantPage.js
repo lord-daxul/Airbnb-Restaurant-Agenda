@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import api from './services/api'
 import { tables as repoTables } from './data/repoData'
 import './SearchResult.css'
+import TableSelector from './TableSelector'
 
 function RestaurantPage() {
   const { id } = useParams()
@@ -11,6 +12,9 @@ function RestaurantPage() {
   const [pricePerPerson, setPricePerPerson] = useState(null)
   const [priceRangeNumeric, setPriceRangeNumeric] = useState(null)
   const partySize = 2
+  const [selectedDate, setSelectedDate] = useState('')
+  const [guests, setGuests] = useState(2)
+  const [selectedTable, setSelectedTable] = useState(null)
 
   useEffect(() => {
     if (!restId) return
@@ -39,6 +43,16 @@ function RestaurantPage() {
       }
     } catch (e) { setPricePerPerson(null) }
   }, [restaurant])
+
+  function handleReserve() {
+    // demo behavior: store selection in localStorage bookings
+    const booking = { restaurantId: restaurant.id, tableId: selectedTable, date: selectedDate, guests }
+    const raw = localStorage.getItem('demo_bookings')
+    const arr = raw ? JSON.parse(raw) : []
+    arr.push(booking)
+    localStorage.setItem('demo_bookings', JSON.stringify(arr))
+    alert('Reserva demo guardada en localStorage')
+  }
 
   if (!restaurant) return <div style={{ padding: 32 }}>Cargando ficha...</div>
 
@@ -83,6 +97,16 @@ function RestaurantPage() {
           <section style={{ marginBottom: 18 }}>
             <h3>Horario</h3>
             <p>{restaurant.hours || 'No disponible'}</p>
+          </section>
+
+          <section style={{ marginBottom: 18 }}>
+            <h3>Reservar</h3>
+            <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+              <input type="date" value={selectedDate} onChange={e => setSelectedDate(e.target.value)} />
+              <input type="number" min={1} value={guests} onChange={e => setGuests(Number(e.target.value))} style={{ width: 80, padding: 8, fontWeight: 700 }} />
+              <button onClick={() => { if (!selectedDate) return alert('Selecciona una fecha'); if (!selectedTable) return alert('Selecciona una mesa'); handleReserve() }} style={{ background:'#ff385c', color:'#fff', border:'none', padding:'8px 12px', borderRadius:8 }}>Reservar</button>
+            </div>
+            <TableSelector tables={restaurant.tables || []} selectedId={selectedTable} onSelect={setSelectedTable} />
           </section>
 
           <section>

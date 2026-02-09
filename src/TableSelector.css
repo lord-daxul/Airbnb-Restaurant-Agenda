@@ -1,0 +1,7 @@
+.tableSelector { margin-top: 12px; }
+.tableSelector__label { font-weight: 700; margin-bottom: 8px; }
+.tableSelector__list { display:flex; gap:8px; flex-wrap:wrap }
+.tableSelector__item { background:#fff; border:1px solid #e6e6e6; padding:10px 12px; border-radius:8px; cursor:pointer; display:flex; flex-direction:column; min-width:100px }
+.tableSelector__item.selected { border-color:#1672ff; box-shadow:0 6px 18px rgba(22,114,255,0.08) }
+.tableSelector__name { font-weight:600 }
+.tableSelector__seats { color:#666; font-size:13px }
