@@ -37,10 +37,12 @@ export default function BusinessDetail({ business, tables = [] }) {
     let url = ''
     let objectUrl = null
     try {
+      const publicBase = (process.env.PUBLIC_URL || '').replace(/\/$/, '')
       if (!cv) url = ''
       else if (typeof cv === 'string') {
-        if (cv.startsWith('http') || cv.startsWith('data:') || cv.startsWith('/')) url = cv
-        else url = cv.startsWith('.') ? cv.replace(/^\./, '') : `/${cv}`
+        if (cv.startsWith('http') || cv.startsWith('data:')) url = cv
+        else if (cv.startsWith('/')) url = publicBase + cv
+        else url = publicBase + '/' + (cv.startsWith('./') ? cv.replace(/^\.\//, '') : cv)
       } else if (cv instanceof File) {
         objectUrl = URL.createObjectURL(cv)
         url = objectUrl
@@ -51,10 +53,6 @@ export default function BusinessDetail({ business, tables = [] }) {
       }
     } catch (e) { url = '' }
     setCoverUrl(url || null)
-    // DEBUG: temporary log to investigate missing covers in dev
-    // Remove this after debugging
-    // eslint-disable-next-line no-console
-    console.log('BusinessDetail: cover debug', { id: business.id, cover: business.cover, coverUrl: url })
     return () => { if (objectUrl) URL.revokeObjectURL(objectUrl) }
   }, [business])
 
