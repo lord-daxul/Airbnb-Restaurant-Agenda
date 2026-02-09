@@ -4,7 +4,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import LanguageIcon from "@material-ui/icons/Language";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Avatar } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useTranslation } from './i18n';
 import HomeIcon from '@material-ui/icons/Home';
 import ReceiptIcon from '@material-ui/icons/Receipt';
@@ -38,6 +38,84 @@ function Header() {
             { key: 'event', label: 'category.event', Icon: EventIcon },
             { key: 'salon', label: 'category.salon', Icon: SpaIcon }
         ];
+    const [whatOpen, setWhatOpen] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState(categories[0].key);
+    const [location, setLocation] = useState('Caracas');
+    const searchRef = useRef(null);
+    const history = useHistory();
+
+    async function detectCity() {
+        if (!navigator.geolocation) {
+            alert('Geolocalización no soportada en este navegador');
+            return;
+        }
+        try {
+            setLocation('Detectando...');
+            navigator.geolocation.getCurrentPosition(async (pos) => {
+                const { latitude, longitude } = pos.coords;
+                const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+                if (!key) {
+                    alert('Falta REACT_APP_GOOGLE_MAPS_API_KEY en el entorno');
+                    setLocation('');
+                    return;
+                }
+                try {
+                    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${key}`;
+                    const res = await fetch(url);
+                    const data = await res.json();
+                    if (data.status === 'OK' && data.results && data.results.length) {
+                        let city = '';
+                        let state = '';
+                        // Prefer a result that contains a locality
+                        let found = false;
+                        for (const r of data.results) {
+                            const locality = r.address_components.find(c => c.types && c.types.includes('locality'));
+                            if (locality) {
+                                city = locality.long_name;
+                                const admin = r.address_components.find(c => c.types && c.types.includes('administrative_area_level_1'));
+                                if (admin) state = admin.long_name;
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            const comps = data.results[0].address_components || [];
+                            const comp = comps.find(c => c.types && (c.types.includes('administrative_area_level_2') || c.types.includes('administrative_area_level_1')));
+                            if (comp) city = comp.long_name;
+                        }
+                        const label = city ? (state ? `${city}, ${state}` : city) : `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
+                        setLocation(label);
+                    } else {
+                        setLocation('');
+                        alert('No se pudo obtener la ciudad desde la API de Geocoding');
+                    }
+                } catch (err) {
+                    setLocation('');
+                    alert('Error consultando la API de Geocoding');
+                }
+            }, (err) => {
+                setLocation('');
+                alert('Permiso de geolocalización denegado o error');
+            });
+        } catch (err) {
+            setLocation('');
+            alert('Error al intentar detectar ubicación');
+        }
+    }
+
+    function doSearch() {
+        const q = new URLSearchParams({ category: selectedCategory, location });
+        history.push(`/search?${q.toString()}`);
+    }
+
+    useEffect(() => {
+        function handleClick(e) {
+            if (searchRef.current && !searchRef.current.contains(e.target)) setWhatOpen(false);
+        }
+        document.addEventListener('click', handleClick);
+        return () => document.removeEventListener('click', handleClick);
+    }, []);
+
     return (
         <div className='header'>
             <Link to='/'>
@@ -48,7 +126,7 @@ function Header() {
                 />
             </Link>
 
-                        {/* Desktop categories row */}
+                        {/* Desktop categories row (kept for navigation) */}
                         <div className="header__categories">
                             {categories.map(c => {
                                 const Icon = c.Icon;
@@ -94,19 +172,46 @@ function Header() {
                             </div>
                         </div>
            
-            <div className='header__center'>
-                <input type="text" placeholder={t('search.placeholder')} />
-                <SearchIcon />
+            {/* Center search: What | Where | Button */}
+            <div className='header__center' ref={searchRef}>
+                <div className="search-bar">
+                    <div className="search-part what" onClick={() => setWhatOpen(!whatOpen)}>
+                        <div className="search-label">{t('search.what')}</div>
+                        <div className="search-value">{t(categories.find(c=>c.key===selectedCategory).label)}</div>
+                        <ExpandMoreIcon className="search-caret" />
+                        {whatOpen && (
+                            <div className="what-dropdown">
+                                {categories.map(c => {
+                                    const Icon = c.Icon;
+                                    return (
+                                        <div key={c.key} className="what-item" onClick={() => { setSelectedCategory(c.key); setWhatOpen(false); }}>
+                                            <Icon className="what-item__icon" />
+                                            <div className="what-item__label">{t(c.label)}</div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="search-part where">
+                        <div className="search-label">{t('search.where')}</div>
+                        <div className="where-input">
+                            <RoomIcon className="where-icon" onClick={detectCity} style={{ cursor: 'pointer' }} title="Detectar ciudad" />
+                            <input value={location} onChange={e=>setLocation(e.target.value)} onKeyDown={e=>{ if(e.key==='Enter') doSearch(); }} />
+                        </div>
+                    </div>
+
+                    <div className="search-part button">
+                        <button className="search-button" onClick={doSearch}><SearchIcon /> <span>{t('search.go')}</span></button>
+                    </div>
+                </div>
             </div>
 
             <div className='header__right'>
-                <p>{t('header.become_host')}</p>
-                                <Link to="/register" style={{ textDecoration: 'none', color: 'inherit', margin: '0 8px' }}>
-                                    <p>Register</p>
-                                </Link>
-                                <Link to="/login" style={{ textDecoration: 'none', color: 'inherit', margin: '0 8px' }}>
-                                    <p>Login</p>
-                                </Link>
+                <Link to="/login" style={{ textDecoration: 'none', color: 'inherit', margin: '0 8px' }}>
+                    <p>Login</p>
+                </Link>
                 <LanguageIcon />
                 <select
                     value={lang}

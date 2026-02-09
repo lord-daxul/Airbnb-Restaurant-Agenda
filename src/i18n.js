@@ -2,6 +2,9 @@ import React, { createContext, useContext, useState } from 'react';
 
 const translations = {
   en: {
+    'search.what': 'What',
+    'search.where': 'Where',
+    'search.go': 'Search',
     'header.become_host': 'Register Local',
     'search.placeholder': 'Search',
     'banner.hide': 'Hide',
@@ -91,6 +94,9 @@ const translations = {
     'category.salon': 'Salon'
   },
   es: {
+    'search.what': 'Qué',
+    'search.where': 'Dónde',
+    'search.go': 'Buscar',
     'header.become_host': 'Registrar Local',
     'search.placeholder': 'Buscar',
     'banner.hide': 'Ocultar',
