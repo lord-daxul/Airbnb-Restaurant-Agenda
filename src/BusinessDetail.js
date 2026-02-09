@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import TableSelector from './TableSelector'
 
 export default function BusinessDetail({ business, tables = [] }) {
+  const [coverUrl, setCoverUrl] = useState(null)
   const [pricePerPerson, setPricePerPerson] = useState(null)
   const [priceRangeNumeric, setPriceRangeNumeric] = useState(null)
   const partySize = 2
@@ -30,6 +31,29 @@ export default function BusinessDetail({ business, tables = [] }) {
     } catch (e) { setPricePerPerson(null) }
   }, [business, tables])
 
+  useEffect(() => {
+    if (!business) { setCoverUrl(null); return }
+    const cv = business.cover || business.img || ''
+    let url = ''
+    let objectUrl = null
+    try {
+      if (!cv) url = ''
+      else if (typeof cv === 'string') {
+        if (cv.startsWith('http') || cv.startsWith('data:') || cv.startsWith('/')) url = cv
+        else url = cv.startsWith('.') ? cv.replace(/^\./, '') : `/${cv}`
+      } else if (cv instanceof File) {
+        objectUrl = URL.createObjectURL(cv)
+        url = objectUrl
+      } else if (cv && typeof cv === 'object' && cv.url) {
+        url = cv.url
+      } else {
+        url = ''
+      }
+    } catch (e) { url = '' }
+    setCoverUrl(url || null)
+    return () => { if (objectUrl) URL.revokeObjectURL(objectUrl) }
+  }, [business])
+
   function handleReserve() {
     const booking = { restaurantId: business.id, tableId: selectedTable, start: selectedDate, seatsBooked: guests, pricePerSeat: pricePerPerson, total: pricePerPerson ? Number(pricePerPerson) * Number(guests) : undefined, status: 'demo' }
     const raw = localStorage.getItem('mock_bookings')
@@ -44,7 +68,7 @@ export default function BusinessDetail({ business, tables = [] }) {
   return (
     <div style={{ padding: 24, maxWidth: 1000, margin: '0 auto' }}>
       <div style={{ borderRadius: 8, overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
-        <img src={business.cover || business.img || 'https://via.placeholder.com/1000x400'} alt="cover" style={{ width: '100%', height: 400, objectFit: 'cover' }} />
+        <img src={coverUrl || 'https://via.placeholder.com/1000x400'} alt="cover" style={{ width: '100%', height: 400, objectFit: 'cover' }} />
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 18 }}>
