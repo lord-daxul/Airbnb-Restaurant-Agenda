@@ -42,7 +42,7 @@ function Home() {
                   src="https://media.nomadicmatt.com/2019/airbnb_breakup3.jpg"
                   title={'La Esquina del Sabor'}
                   description={'Cocina local con énfasis en carnes y opciones saludables.'}
-                  price={'$$'}
+                  price={30}
               />
             </Link>
             <Link to="/restaurant/102" style={{ textDecoration: 'none' }}>
@@ -50,7 +50,7 @@ function Home() {
                   src="https://thespaces.com/wp-content/uploads/2017/08/Courtesy-of-Airbnb.jpg"
                   title={'Mar y Tierra'}
                   description={'Mariscos y cortes selectos en ambiente elegante.'}
-                  price={'$$$'}
+                  price={45}
               />
             </Link>
             <Link to="/restaurant/103" style={{ textDecoration: 'none' }}>
@@ -58,7 +58,7 @@ function Home() {
                   src="https://media.nomadicmatt.com/2018/apartment.jpg"
                   title={'Sabor y Tradición'}
                   description={'Recetas tradicionales con ingredientes orgánicos.'}
-                  price={'$'}
+                  price={20}
               />
             </Link>
             </div>

@@ -27,7 +27,9 @@ function RestaurantPanel() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <div><strong>Rating:</strong> {restaurant.rating}</div>
-              {restaurant.priceRange && <div><strong>Precio:</strong> {restaurant.priceRange}</div>}
+              { (restaurant.pricePerPerson || restaurant.priceRange) && (
+                <div><strong>Precio:</strong> {restaurant.pricePerPerson ? (`$${restaurant.pricePerPerson} / persona`) : restaurant.priceRange}</div>
+              )}
             </div>
             {restaurant.rating && <div style={{ background: '#fff3ea', padding: '6px 10px', borderRadius: 8, color: '#ff6600' }}>{restaurant.rating}</div>}
           </div>

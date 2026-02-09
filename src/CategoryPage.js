@@ -30,7 +30,7 @@ export default function CategoryPage() {
               title={r.name}
               description={r.description}
               star={r.rating}
-              price={r.priceRange}
+              price={r.pricePerPerson || r.priceRange}
               total={r.tags ? r.tags.join(', ') : ''}
             />
           </Link>
