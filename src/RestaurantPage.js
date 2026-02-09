@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import api from './services/api'
-import { tables as repoTables } from './data/repoData'
+import { tables as repoTables, restaurants as repoRestaurants, listings as repoListings } from './data/repoData'
 import './SearchResult.css'
 import BusinessDetail from './BusinessDetail'
 
@@ -9,50 +9,39 @@ function RestaurantPage() {
   const { id } = useParams()
   const restId = Number(id)
   const [restaurant, setRestaurant] = useState(null)
-  const [pricePerPerson, setPricePerPerson] = useState(null)
-  const [priceRangeNumeric, setPriceRangeNumeric] = useState(null)
-  const partySize = 2
-  const [selectedDate, setSelectedDate] = useState('')
-  const [guests, setGuests] = useState(2)
-  const [selectedTable, setSelectedTable] = useState(null)
+  // reservation UI handled in BusinessDetail; avoid unused state here
 
   useEffect(() => {
     if (!restId) return
+    let resolved = false
     api.fetchRestaurant(restId).then(r => {
-      if (r && r.name) setRestaurant(r)
-      else setRestaurant(sampleRestaurant(restId))
-    }).catch(() => setRestaurant(sampleRestaurant(restId)))
+      if (r && r.name) { setRestaurant(r); resolved = true }
+    }).catch(() => {})
+
+    // if api didn't resolve, try localStorage mock data and repo data
+    setTimeout(() => {
+      if (resolved) return
+      try {
+        const rawListings = localStorage.getItem('mock_listings')
+        const rawRestaurants = localStorage.getItem('mock_restaurants')
+        const fromListings = rawListings ? JSON.parse(rawListings) : []
+        const fromRestaurants = rawRestaurants ? JSON.parse(rawRestaurants) : []
+        let found = null
+        if (Array.isArray(fromListings)) found = fromListings.find(x => Number(x.id) === restId)
+        if (!found && Array.isArray(fromRestaurants)) found = fromRestaurants.find(x => Number(x.id) === restId)
+        if (!found && Array.isArray(repoListings)) found = repoListings.find(x => Number(x.id) === restId)
+        if (!found && Array.isArray(repoRestaurants)) found = repoRestaurants.find(x => Number(x.id) === restId)
+        if (found) { setRestaurant(found); resolved = true; return }
+      } catch (e) { /* ignore parse errors */ }
+      if (!resolved) setRestaurant(sampleRestaurant(restId))
+    }, 100)
   }, [restId])
 
   useEffect(() => {
-    if (!restaurant) return
-    try {
-      const raw = localStorage.getItem('mock_tables')
-      const all = raw ? JSON.parse(raw) : (Array.isArray(repoTables) ? repoTables : [])
-      const my = (Array.isArray(all) ? all.filter(t => Number(t.restaurantId) === Number(restaurant.id)) : [])
-      const prices = []
-      my.forEach(t => { if (Array.isArray(t.slots)) t.slots.forEach(s => { if (s && s.pricePerSeat) prices.push(Number(s.pricePerSeat)) }) })
-      if (prices.length > 0) {
-        const min = Math.min(...prices)
-        const max = Math.max(...prices)
-        setPriceRangeNumeric(min === max ? { min } : { min, max })
-        setPricePerPerson(min)
-      } else {
-        setPriceRangeNumeric(null)
-        setPricePerPerson(null)
-      }
-    } catch (e) { setPricePerPerson(null) }
+    // pricing and table selection moved to BusinessDetail; keep RestaurantPage lean
   }, [restaurant])
 
-  function handleReserve() {
-    // demo behavior: store selection in localStorage bookings
-    const booking = { restaurantId: restaurant.id, tableId: selectedTable, date: selectedDate, guests }
-    const raw = localStorage.getItem('demo_bookings')
-    const arr = raw ? JSON.parse(raw) : []
-    arr.push(booking)
-    localStorage.setItem('demo_bookings', JSON.stringify(arr))
-    alert('Reserva demo guardada en localStorage')
-  }
+  // reservation logic moved to BusinessDetail; no local handler needed
 
   if (!restaurant) return <div style={{ padding: 32 }}>Cargando ficha...</div>
 

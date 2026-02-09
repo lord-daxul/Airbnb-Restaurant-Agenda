@@ -4,7 +4,7 @@ import '../panels.css';
 
 function UserPanel() {
   const [tab, setTab] = useState('profile');
-  const [user, setUser] = useState(() => {
+  const [user] = useState(() => {
     const raw = localStorage.getItem('demo_user');
     return raw ? JSON.parse(raw) : null;
   });
