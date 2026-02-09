@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import api from './services/api'
 import { tables as repoTables } from './data/repoData'
 import './SearchResult.css'
-import TableSelector from './TableSelector'
+import BusinessDetail from './BusinessDetail'
 
 function RestaurantPage() {
   const { id } = useParams()
@@ -56,79 +56,7 @@ function RestaurantPage() {
 
   if (!restaurant) return <div style={{ padding: 32 }}>Cargando ficha...</div>
 
-  return (
-    <div style={{ padding: 24, maxWidth: 1000, margin: '0 auto' }}>
-      <div style={{ borderRadius: 8, overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
-        <img src={restaurant.cover || restaurant.img || 'https://via.placeholder.com/1000x400'} alt="cover" style={{ width: '100%', height: 400, objectFit: 'cover' }} />
-      </div>
-
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 18 }}>
-        <div>
-          <h1 style={{ margin: 0 }}>{restaurant.name}</h1>
-          <div style={{ color: '#666' }}>{restaurant.category || 'Restaurante'} · {restaurant.address?.city || ''}</div>
-          {restaurant.tags && restaurant.tags.length > 0 && (
-            <div style={{ marginTop: 8 }}>
-              {restaurant.tags.map(tag => (
-                <span key={tag} style={{ display: 'inline-block', marginRight: 8, marginBottom: 6, background: '#f1f1f1', padding: '6px 8px', borderRadius: 16, fontSize: 13 }}>{tag}</span>
-              ))}
-            </div>
-          )}
-        </div>
-        <div style={{ textAlign: 'right' }}>
-          <div style={{ background: '#fff3ea', padding: '6px 10px', borderRadius: 8, color: '#ff6600', display: 'inline-block' }}>{restaurant.rating || '—'}</div>
-          <div style={{ marginTop: 8 }}>
-            <strong>{priceRangeNumeric ? (priceRangeNumeric.min && priceRangeNumeric.max ? (`$${priceRangeNumeric.min}–$${priceRangeNumeric.max} / persona`) : (`$${priceRangeNumeric.min} / persona`)) : (restaurant.pricePerPerson ? (`$${restaurant.pricePerPerson} / persona`) : (restaurant.priceRange || ''))}</strong>
-            { (priceRangeNumeric || restaurant.pricePerPerson) && (
-              <div style={{ fontSize: 12, color: '#666' }}>${(priceRangeNumeric ? (priceRangeNumeric.min || 0) : restaurant.pricePerPerson) * partySize} total (estimado para {partySize})</div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 20, marginTop: 18 }}>
-        <div>
-          {restaurant.description && (
-            <section style={{ marginBottom: 18 }}>
-              <h3>Descripción</h3>
-              <p style={{ color: '#444' }}>{restaurant.description}</p>
-            </section>
-          )}
-
-          <section style={{ marginBottom: 18 }}>
-            <h3>Horario</h3>
-            <p>{restaurant.hours || 'No disponible'}</p>
-          </section>
-
-          <section style={{ marginBottom: 18 }}>
-            <h3>Reservar</h3>
-            <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-              <input type="date" value={selectedDate} onChange={e => setSelectedDate(e.target.value)} />
-              <input type="number" min={1} max={12} value={guests} onChange={e => setGuests(Math.max(1, Math.min(12, Number(e.target.value || 1))))} style={{ width: 80, padding: 8, fontWeight: 700 }} />
-              <button onClick={() => { if (!selectedDate) return alert('Selecciona una fecha'); if (!selectedTable) return alert('Selecciona una mesa'); handleReserve() }} style={{ background:'#ff385c', color:'#fff', border:'none', padding:'8px 12px', borderRadius:8 }}>Reservar</button>
-            </div>
-            <TableSelector tables={restaurant.tables || []} selectedId={selectedTable} onSelect={setSelectedTable} guests={guests} />
-          </section>
-
-          <section>
-            <h3>Ubicación</h3>
-            <p>{(restaurant.address && `${restaurant.address.address}, ${restaurant.address.city}, ${restaurant.address.state}`) || 'No disponible'}</p>
-          </section>
-        </div>
-
-        <aside style={{ position: 'sticky', top: 24 }}>
-          <div style={{ padding: 18, borderRadius: 8, background: '#fff', boxShadow: '0 4px 14px rgba(0,0,0,0.06)' }}>
-            <div style={{ marginBottom: 10 }}><strong>{restaurant.rating || '—'}</strong> · Valoración</div>
-            <div style={{ marginBottom: 12 }}>
-              <strong>{pricePerPerson ? (`$${pricePerPerson} / persona`) : (restaurant.priceRange || '')}</strong>
-              {pricePerPerson && <div style={{ fontSize: 12, color: '#666' }}>${pricePerPerson * partySize} total (estimado para {partySize})</div>}
-            </div>
-            <button style={{ width: '100%', background: '#ff385c', color: '#fff', border: 'none', padding: '10px 12px', borderRadius: 8 }}>Reservar</button>
-            <div style={{ marginTop: 12, color: '#666' }}>Botón de reserva demo (no realiza pago)</div>
-          </div>
-        </aside>
-      </div>
-    </div>
-  )
+  return <BusinessDetail business={restaurant} tables={restaurant.tables || []} />
 }
 
 function sampleRestaurant(id) {
