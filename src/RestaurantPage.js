@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import api from './services/api'
-import { tables as repoTables } from './data/repoData'
+import { tables as repoTables, restaurants as repoRestaurants, listings as repoListings } from './data/repoData'
 import './SearchResult.css'
 import BusinessDetail from './BusinessDetail'
 
@@ -13,10 +13,28 @@ function RestaurantPage() {
 
   useEffect(() => {
     if (!restId) return
+    let resolved = false
     api.fetchRestaurant(restId).then(r => {
-      if (r && r.name) setRestaurant(r)
-      else setRestaurant(sampleRestaurant(restId))
-    }).catch(() => setRestaurant(sampleRestaurant(restId)))
+      if (r && r.name) { setRestaurant(r); resolved = true }
+    }).catch(() => {})
+
+    // if api didn't resolve, try localStorage mock data and repo data
+    setTimeout(() => {
+      if (resolved) return
+      try {
+        const rawListings = localStorage.getItem('mock_listings')
+        const rawRestaurants = localStorage.getItem('mock_restaurants')
+        const fromListings = rawListings ? JSON.parse(rawListings) : []
+        const fromRestaurants = rawRestaurants ? JSON.parse(rawRestaurants) : []
+        let found = null
+        if (Array.isArray(fromListings)) found = fromListings.find(x => Number(x.id) === restId)
+        if (!found && Array.isArray(fromRestaurants)) found = fromRestaurants.find(x => Number(x.id) === restId)
+        if (!found && Array.isArray(repoListings)) found = repoListings.find(x => Number(x.id) === restId)
+        if (!found && Array.isArray(repoRestaurants)) found = repoRestaurants.find(x => Number(x.id) === restId)
+        if (found) { setRestaurant(found); resolved = true; return }
+      } catch (e) { /* ignore parse errors */ }
+      if (!resolved) setRestaurant(sampleRestaurant(restId))
+    }, 100)
   }, [restId])
 
   useEffect(() => {
