@@ -9,7 +9,8 @@
     "description": "Cocina local con énfasis en carnes y opciones saludables.",
     "hours": "Lun-Sab 11:00 - 23:00",
     "address": { "state": "Distrito Capital", "city": "Caracas", "address": "Av. Principal, 12" },
-    "cover": "/images/restaurants/101.avif"
+    "cover": "/images/restaurants/101.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   },
   {
     "id": 102,
@@ -21,7 +22,8 @@
     "description": "Mariscos y cortes selectos en ambiente elegante.",
     "hours": "Mar-Dom 12:00 - 22:30",
     "address": { "state": "Distrito Capital", "city": "Caracas", "address": "C.C. Central, Local 5" },
-    "cover": "/images/restaurants/102.avif"
+    "cover": "/images/restaurants/102.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   },
   {
     "id": 103,
@@ -33,7 +35,8 @@
     "description": "Recetas tradicionales con ingredientes orgánicos.",
     "hours": "Todos los días 8:00 - 22:00",
     "address": { "state": "Distrito Capital", "city": "Caracas", "address": "Calle 7, Esquina" },
-    "cover": "/images/restaurants/103.avif"
+    "cover": "/images/restaurants/103.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   },
   {
     "id": 201,
@@ -45,7 +48,8 @@
     "description": "Cafetería con granos locales y pastelería artesanal.",
     "hours": "Lun-Dom 7:00 - 20:00",
     "address": { "state": "Distrito Capital", "city": "Caracas", "address": "Plaza Café, Pb" },
-    "cover": "/images/restaurants/201.avif"
+    "cover": "/images/restaurants/201.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   },
   {
     "id": 202,
@@ -57,7 +61,8 @@
     "description": "Especialistas en cafés filtrados y opciones sin gluten.",
     "hours": "Mar-Dom 8:00 - 18:00",
     "address": { "state": "Zulia", "city": "Maracaibo", "address": "Av. Café 45" },
-    "cover": "/images/restaurants/202.avif"
+    "cover": "/images/restaurants/202.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   },
   {
     "id": 203,
@@ -69,7 +74,8 @@
     "description": "Pequeño café especializado en espresso y brunch.",
     "hours": "Todos los días 7:30 - 16:30",
     "address": { "state": "Distrito Capital", "city": "Caracas", "address": "Boulevard 3" },
-    "cover": "/images/restaurants/203.avif"
+    "cover": "/images/restaurants/203.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   },
   {
     "id": 301,
@@ -81,7 +87,8 @@
     "description": "Ambiente familiar y platos para niños.",
     "hours": "Lun-Dom 9:00 - 22:00",
     "address": { "state": "Distrito Capital", "city": "Caracas", "address": "Urbanización Las Flores" },
-    "cover": "/images/restaurants/301.avif"
+    "cover": "/images/restaurants/301.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   },
   {
     "id": 302,
@@ -93,7 +100,8 @@
     "description": "Comida variada ideal para familias numerosas.",
     "hours": "Todos los días 10:00 - 23:00",
     "address": { "state": "Distrito Capital", "city": "Caracas", "address": "Centro Comercial Patio" },
-    "cover": "/images/restaurants/302.avif"
+    "cover": "/images/restaurants/302.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   },
   {
     "id": 303,
@@ -105,7 +113,8 @@
     "description": "Comidas caseras y porciones generosas.",
     "hours": "Lun-Sab 8:00 - 20:00",
     "address": { "state": "Distrito Capital", "city": "Caracas", "address": "Av. Principal 77" },
-    "cover": "/images/restaurants/303.avif"
+    "cover": "/images/restaurants/303.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   },
   {
     "id": 401,
@@ -117,7 +126,8 @@
     "description": "Espacio para eventos, banquetes y celebraciones.",
     "hours": "Bajo reserva",
     "address": { "state": "Distrito Capital", "city": "Caracas", "address": "Av. Los Próceres" },
-    "cover": "/images/restaurants/401.avif"
+    "cover": "/images/restaurants/401.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   },
   {
     "id": 402,
@@ -129,7 +139,8 @@
     "description": "Organización y catering para eventos corporativos.",
     "hours": "Bajo reserva",
     "address": { "state": "Distrito Capital", "city": "Caracas", "address": "Edificio Central Piso 10" },
-    "cover": "/images/restaurants/402.avif"
+    "cover": "/images/restaurants/402.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   },
   {
     "id": 403,
@@ -141,7 +152,8 @@
     "description": "Salón elegante con menús personalizados.",
     "hours": "Bajo reserva",
     "address": { "state": "Distrito Capital", "city": "Caracas", "address": "Km 4 Carretera" },
-    "cover": "/images/restaurants/403.avif"
+    "cover": "/images/restaurants/403.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   },
   {
     "id": 501,
@@ -153,7 +165,8 @@
     "description": "Salón con servicio de comida ligera y productos orgánicos.",
     "hours": "Mar-Dom 9:00 - 19:00",
     "address": { "state": "Distrito Capital", "city": "Caracas", "address": "C.C. Salón, Local 2" },
-    "cover": "/images/restaurants/501.avif"
+    "cover": "/images/restaurants/501.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   },
   {
     "id": 502,
@@ -165,11 +178,12 @@
     "description": "Salón y spa con menú saludable para acompañar tratamientos.",
     "hours": "Lun-Sab 10:00 - 20:00",
     "address": { "state": "Distrito Capital", "city": "Caracas", "address": "Zona Rosa" },
-    "cover": "/images/restaurants/502.avif"
+    "cover": "/images/restaurants/502.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   },
   {
     "id": 503,
-    "name": "Peluquería Moderna",
+    "name": "Salón Moderno",
     "category": "Salón",
     "tags": ["saludable"],
     "rating": 3.9,
@@ -177,6 +191,7 @@
     "description": "Servicio rápido con opciones de snack saludables.",
     "hours": "Lun-Vie 9:00 - 18:00",
     "address": { "state": "Distrito Capital", "city": "Caracas", "address": "Av. Estilo 21" },
-    "cover": "/images/restaurants/503.avif"
+    "cover": "/images/restaurants/503.avif",
+    "chairs": { "min": 1, "max": 12, "default": 2 }
   }
 ]
