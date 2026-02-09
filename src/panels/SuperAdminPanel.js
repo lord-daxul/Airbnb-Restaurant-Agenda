@@ -304,7 +304,7 @@ function EditBooking({ match, history }) {
           <input name="seatsBooked" value={form.seatsBooked || ''} onChange={onChange} />
         </div>
         <div>
-          <label>Precio por asiento</label>
+          <label>Precio por asiento o silla no se aun que palabra</label>
           <input name="pricePerSeat" value={form.pricePerSeat || ''} onChange={onChange} />
         </div>
         <div>
