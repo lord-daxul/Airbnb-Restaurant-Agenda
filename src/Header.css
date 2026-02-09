@@ -38,11 +38,11 @@
 
 /* New search bar structure */
 .search-bar { display:flex; gap:18px; align-items:center; width:100%; }
-.search-part { background: transparent; padding: 6px 10px; border-radius: 8px; display:flex; flex-direction:column; position:relative; }
+.search-part { background: transparent; padding: 6px 10px; border-radius: 8px; display:flex; flex-direction:row; align-items:center; position:relative; }
 .search-part.what { min-width:220px; cursor:pointer; }
 .search-part.where { flex: 1; min-width:300px; }
 .search-part.button { padding:0; align-items:center; justify-content:center; }
-.search-label { font-size:12px; color:#9aa0a6; margin-bottom:6px; }
+.search-label { font-size:12px; color:#9aa0a6; margin-bottom:0; margin-right:8px; white-space:nowrap; }
 .search-value { font-weight:700; color:#111; }
 .search-caret { color:#777; }
 .where-input { display:flex; align-items:center; gap:10px; }
@@ -125,10 +125,11 @@
 .mobile-avatar { }
 .mobile-search { display:flex; align-items:center; gap:8px; }
 .mobile-search__input { flex:1; display:flex; align-items:center; gap:8px; background:#fff; border-radius:30px; padding:8px 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
-.mobile-search__input input { border: none; outline: none; width:100%; }
-.mobile-search__filter { color:#888; }
+.mobile-search__input input { border: none; outline: none; width:100%; font-weight:600; }
+.mobile-search__button { background:#1672ff; border:none; color:white; padding:8px 10px; border-radius:12px; display:flex; align-items:center; justify-content:center; box-shadow: 0 6px 18px rgba(22,114,255,0.12); cursor:pointer; }
+.mobile-search__button svg { font-size:20px; }
 .mobile-categories { display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; }
-.chip { background:#f1f1f1; padding:8px 12px; border-radius:20px; font-size:13px; color:#666; white-space:nowrap; }
+.chip { background:#f1f1f1; padding:8px 12px; border-radius:20px; font-size:13px; color:#666; white-space:nowrap; cursor:pointer; }
 .chip.active { background:#ff6600; color:#fff; }
 
 @media (max-width: 719px) {

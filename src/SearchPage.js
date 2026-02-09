@@ -15,7 +15,8 @@ function useQuery() {
 function SearchPage() {
     const { t } = useTranslation();
     const query = useQuery();
-    const categoryQ = (query.get('category') || '').trim();
+    // support both `listings` (new convention) and `category` (backwards compat)
+    const categoryQ = (query.get('listings') || query.get('category') || '').trim();
     const locationQ = (query.get('location') || '').trim().toLowerCase();
 
     const combined = useMemo(() => {

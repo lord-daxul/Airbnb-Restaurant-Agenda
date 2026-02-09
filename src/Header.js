@@ -39,7 +39,7 @@ function Header() {
             { key: 'salon', label: 'category.salon', Icon: SpaIcon }
         ];
     const [whatOpen, setWhatOpen] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState(categories[0].key);
+    const [selectedListing, setSelectedListing] = useState(categories[0].key);
     const [location, setLocation] = useState('Caracas');
     const searchRef = useRef(null);
     const history = useHistory();
@@ -104,7 +104,7 @@ function Header() {
     }
 
     function doSearch() {
-        const q = new URLSearchParams({ category: selectedCategory, location });
+        const q = new URLSearchParams({ listings: selectedListing, location });
         history.push(`/search?${q.toString()}`);
     }
 
@@ -145,12 +145,12 @@ function Header() {
                         <div className="mobile-header">
                             <div className="mobile-header__top">
                                 <div className="mobile-location">
-                                    <RoomIcon className="mobile-location__icon" />
-                                    <div className="mobile-location__text">
-                                        <div className="mobile-location__label">Ubicación actual</div>
-                                        <div className="mobile-location__place">Libertador, Distrito Capital</div>
+                                        <RoomIcon className="mobile-location__icon" onClick={detectCity} style={{ cursor: 'pointer' }} title="Detectar ciudad" />
+                                        <div className="mobile-location__text">
+                                            <div className="mobile-location__label">{t('search.where')}</div>
+                                            <div className="mobile-location__place">{location || '—'}</div>
+                                        </div>
                                     </div>
-                                </div>
                                 <div className="mobile-avatar">
                                     <Avatar onClick={() => setMenuOpen(!menuOpen)} style={{ cursor: 'pointer', width:36, height:36 }} />
                                 </div>
@@ -159,16 +159,28 @@ function Header() {
                             <div className="mobile-search">
                                 <div className="mobile-search__input">
                                     <SearchIcon />
-                                    <input placeholder={t('search.placeholder')} />
+                                    <input
+                                        value={location}
+                                        onChange={e => setLocation(e.target.value)}
+                                        onKeyDown={e => { if (e.key === 'Enter') doSearch(); }}
+                                        placeholder={t('search.where')}
+                                    />
                                 </div>
-                                <TuneIcon className="mobile-search__filter" />
+                                <button className="mobile-search__button" onClick={doSearch}><SearchIcon /></button>
                             </div>
 
                             <div className="mobile-categories">
-                                <div className="chip active">{t('home.entire_homes')}</div>
-                                <div className="chip">{t('category.restaurant')}</div>
-                                <div className="chip">{t('category.cafe')}</div>
-                                <div className="chip">{t('category.family')}</div>
+                                <div
+                                    className={`chip ${selectedListing === 'entire' ? 'active' : ''}`}
+                                    onClick={() => setSelectedListing('entire')}
+                                >{t('home.entire_homes')}</div>
+                                {categories.map(c => (
+                                    <div
+                                        key={c.key}
+                                        className={`chip ${selectedListing === c.key ? 'active' : ''}`}
+                                        onClick={() => setSelectedListing(c.key)}
+                                    >{t(c.label)}</div>
+                                ))}
                             </div>
                         </div>
            
@@ -177,14 +189,14 @@ function Header() {
                 <div className="search-bar">
                     <div className="search-part what" onClick={() => setWhatOpen(!whatOpen)}>
                         <div className="search-label">{t('search.what')}</div>
-                        <div className="search-value">{t(categories.find(c=>c.key===selectedCategory).label)}</div>
+                        <div className="search-value">{t(categories.find(c=>c.key===selectedListing).label)}</div>
                         <ExpandMoreIcon className="search-caret" />
                         {whatOpen && (
                             <div className="what-dropdown">
                                 {categories.map(c => {
                                     const Icon = c.Icon;
                                     return (
-                                        <div key={c.key} className="what-item" onClick={() => { setSelectedCategory(c.key); setWhatOpen(false); }}>
+                                        <div key={c.key} className="what-item" onClick={() => { setSelectedListing(c.key); setWhatOpen(false); }}>
                                             <Icon className="what-item__icon" />
                                             <div className="what-item__label">{t(c.label)}</div>
                                         </div>
