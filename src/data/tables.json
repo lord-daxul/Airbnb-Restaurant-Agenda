@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "restaurantId": 101,
+    "name": "Mesa ventana",
+    "capacity": 4,
+    "slots": [
+      { "start": "10:00", "end": "12:00", "pricePerSeat": 8 },
+      { "start": "12:00", "end": "14:00", "pricePerSeat": 10 },
+      { "start": "18:00", "end": "20:00", "pricePerSeat": 12 }
+    ]
+  },
+  {
+    "id": 2,
+    "restaurantId": 101,
+    "name": "Mesa central",
+    "capacity": 6,
+    "slots": [
+      { "start": "10:00", "end": "12:00", "pricePerSeat": 7 },
+      { "start": "12:00", "end": "14:00", "pricePerSeat": 9 },
+      { "start": "18:00", "end": "20:00", "pricePerSeat": 11 }
+    ]
+  }
+]

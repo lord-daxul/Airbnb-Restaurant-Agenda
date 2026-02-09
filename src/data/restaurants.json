@@ -1,0 +1,38 @@
+[
+  {
+    "id": 101,
+    "name": "La Esquina del Sabor",
+    "category": "Restaurante",
+    "tags": ["carnes", "saludable"],
+    "rating": 4.6,
+    "priceRange": "$$",
+    "description": "Cocina local con énfasis en carnes y opciones saludables.",
+    "hours": "Lun-Sab 11:00 - 23:00",
+    "address": { "state": "Distrito Capital", "city": "Caracas", "address": "Av. Principal, 12" },
+    "cover": "/images/restaurants/101.avif"
+  },
+  {
+    "id": 102,
+    "name": "Mar y Tierra",
+    "category": "Restaurante",
+    "tags": ["carnes", "sin gluten"],
+    "rating": 4.4,
+    "priceRange": "$$$",
+    "description": "Mariscos y cortes selectos en ambiente elegante.",
+    "hours": "Mar-Dom 12:00 - 22:30",
+    "address": { "state": "Distrito Capital", "city": "Caracas", "address": "C.C. Central, Local 5" },
+    "cover": "/images/restaurants/102.avif"
+  },
+  {
+    "id": 103,
+    "name": "Sabor y Tradición",
+    "category": "Restaurante",
+    "tags": ["arepera", "organico"],
+    "rating": 4.2,
+    "priceRange": "$",
+    "description": "Recetas tradicionales con ingredientes orgánicos.",
+    "hours": "Todos los días 8:00 - 22:00",
+    "address": { "state": "Distrito Capital", "city": "Caracas", "address": "Calle 7, Esquina" },
+    "cover": "/images/restaurants/103.avif"
+  }
+]

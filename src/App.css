@@ -1,0 +1,45 @@
+/* Minimal styles for admin panels */
+.panel-root { padding: 16px; }
+.panel-tabs { display:flex; gap:8px; margin-bottom:12px; }
+.panel-tabs button { padding:8px 12px; cursor:pointer; }
+.panel-tabs button.active { background:#1976d2; color:#fff; border: none; }
+.panel-body { background: #fff; padding: 12px; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.panel-card { padding:12px; }
+.simple-table { width:100%; border-collapse:collapse; }
+.simple-table th, .simple-table td { text-align:left; padding:8px; border-bottom:1px solid #eee; }
+.simple-table thead th { font-weight:600; }
+
+/* Profile styles and responsiveness */
+.profile-root { display: flex; min-height: 80vh; }
+.profile-aside { width: 260px; border-right: 1px solid #eee; padding: 24px; }
+.profile-aside h2 { margin-top: 0; }
+.profile-aside .menu { list-style: none; padding: 0; }
+.profile-aside .menu li { padding: 10px 0; display:flex; align-items:center; }
+.profile-aside .menu .active { padding: 12px 0; background: #f6f6f6; border-radius: 12px; }
+.profile-main { flex: 1; padding: 32px; }
+.profile-header { display:flex; justify-content:space-between; align-items:center; }
+.profile-card { max-width: 700px; margin-top: 18px; }
+.profile-card .card-inner { background: #fff; border-radius: 12px; padding: 28px; box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+.profile-avatar { display:flex; align-items:center; flex-direction:column; }
+.profile-avatar .avatar { width:120px; height:120px; border-radius:50%; background:#222; color:#fff; display:flex; align-items:center; justify-content:center; font-size:48px; }
+.profile-details { margin-top: 24px; color: #666; padding-top: 20px; border-top: 1px solid #eee; }
+.profile-edit-modal { position: fixed; top: 60px; left: 50%; transform: translateX(-50%); width: 720px; background: #fff; box-shadow: 0 8px 30px rgba(0,0,0,0.12); padding: 24px; border-radius: 8px; z-index: 40; }
+.profile-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.profile-form-grid label { display: block; margin-bottom: 6px; }
+.profile-form-grid input { width: 100%; padding: 8px; box-sizing: border-box; }
+.profile-edit-actions { display:flex; gap:8px; margin-top:14px; }
+.btn-primary { background: #ff385c; color: #fff; border: none; padding: 8px 14px; border-radius: 6px; }
+.btn-secondary { padding: 8px 14px; border-radius: 6px; }
+
+@media (max-width: 800px) {
+	.profile-root { flex-direction: column; }
+	.profile-aside { width: 100%; border-right: none; border-bottom: 1px solid #eee; }
+	.profile-main { padding: 18px; }
+	.profile-edit-modal { width: calc(100% - 32px); left: 50%; transform: translateX(-50%); }
+}
+
+@media (max-width: 600px) {
+	.profile-form-grid { grid-template-columns: 1fr; }
+	.profile-avatar .avatar { width: 96px; height: 96px; font-size: 36px; }
+}
+

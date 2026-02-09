@@ -12,16 +12,33 @@ function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // Call demo API
-    api.login({ identifier, password }).then(res => {
-      if (res && res.token) {
-        localStorage.setItem('demo_token', res.token);
-          localStorage.setItem('demo_user', JSON.stringify(res.user));
-        history.push('/');
-      } else {
-        alert(res && res.error ? res.error : 'Login failed');
+    // Mock login: try to find user in mock_users, otherwise create one
+    const ident = (identifier || '').trim()
+    const usersKey = 'mock_users'
+    try {
+      const users = JSON.parse(localStorage.getItem(usersKey) || '[]')
+      let user = null
+      if (ident) {
+        user = users.find(u => u.email === ident.toLowerCase() || (u.name && u.name.toLowerCase() === ident.toLowerCase()))
       }
-    }).catch(err => alert(err.message || 'Login error'));
+      if (!user) {
+        const nameGuess = ident || 'David'
+        user = { name: nameGuess, email: `${nameGuess.replace(/\s+/g, '').toLowerCase()}@example.com` }
+        // persist
+        users.push(user)
+        localStorage.setItem(usersKey, JSON.stringify(users))
+      }
+      localStorage.setItem('demo_token', 'mock-token')
+      localStorage.setItem('demo_user', JSON.stringify(user))
+      history.push('/profile')
+    } catch (e) {
+      // fallback: create a simple demo user
+      const name = identifier || 'David'
+      const user = { name, email: `${name.replace(/\s+/g, '').toLowerCase()}@example.com` }
+      localStorage.setItem('demo_token', 'mock-token')
+      localStorage.setItem('demo_user', JSON.stringify(user))
+      history.push('/mock/profile')
+    }
   }
 
   return (

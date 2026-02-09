@@ -53,10 +53,12 @@ function Header() {
                             {categories.map(c => {
                                 const Icon = c.Icon;
                                 return (
-                                    <div key={c.key} className="header__category">
-                                        <Icon className="header__categoryIcon" />
-                                        <div className="header__categoryLabel">{t(c.label)}</div>
-                                    </div>
+                                    <Link key={c.key} to={`/category/${c.key}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        <div className="header__category">
+                                            <Icon className="header__categoryIcon" />
+                                            <div className="header__categoryLabel">{t(c.label)}</div>
+                                        </div>
+                                    </Link>
                                 );
                             })}
                         </div>
@@ -99,12 +101,12 @@ function Header() {
 
             <div className='header__right'>
                 <p>{t('header.become_host')}</p>
-                <Link to="/register" style={{ textDecoration: 'none', color: 'inherit', margin: '0 8px' }}>
-                  <p>Register</p>
-                </Link>
-                <Link to="/login" style={{ textDecoration: 'none', color: 'inherit', margin: '0 8px' }}>
-                  <p>Login</p>
-                </Link>
+                                <Link to="/register" style={{ textDecoration: 'none', color: 'inherit', margin: '0 8px' }}>
+                                    <p>Register</p>
+                                </Link>
+                                <Link to="/login" style={{ textDecoration: 'none', color: 'inherit', margin: '0 8px' }}>
+                                    <p>Login</p>
+                                </Link>
                 <LanguageIcon />
                 <select
                     value={lang}

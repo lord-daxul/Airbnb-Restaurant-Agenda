@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "title": "La Casa Bistró",
+    "location": "Libertador, Distrito Capital",
+    "description": "Cocina venezolana contemporánea con ingredientes locales frescos.",
+    "price": 30,
+    "rating": 4.8
+  }
+]

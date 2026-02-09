@@ -8,20 +8,30 @@ function Register() {
   const history = useHistory();
   const { t } = useTranslation();
   const [name, setName] = useState('');
+  const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
-    api.register({ name, lastname, email, password, phone, state, municipality })
-      .then(res => {
-        if (res && res.user) {
-          alert('Registro simulado OK');
-          history.push('/login');
-        } else {
-          alert(res && res.error ? res.error : 'Register failed');
-        }
-      }).catch(err => alert(err.message || 'Register error'));
+    // Mock register: create user and log in immediately
+    const user = { name: name || 'David', lastname: lastname || '', email: email || `${(name || 'david').replace(/\s+/g, '').toLowerCase()}@example.com` }
+
+    // save into mock_users list (prototype JSON store)
+    try {
+      const key = 'mock_users'
+      const existing = JSON.parse(localStorage.getItem(key) || '[]')
+      const idx = existing.findIndex(u => u.email === user.email)
+      if (idx >= 0) existing[idx] = Object.assign({}, existing[idx], user)
+      else existing.push(user)
+      localStorage.setItem(key, JSON.stringify(existing))
+    } catch (e) {
+      console.warn('mock user store failed', e)
+    }
+
+    localStorage.setItem('demo_token', 'mock-token')
+    localStorage.setItem('demo_user', JSON.stringify(user))
+    history.push('/profile')
   }
 
   return (
@@ -32,6 +42,10 @@ function Register() {
           <label>
             {t('auth.name')}
             <input value={name} onChange={e => setName(e.target.value)} required />
+          </label>
+          <label>
+            {t('auth.lastname') || 'Apellido'}
+            <input value={lastname} onChange={e => setLastname(e.target.value)} />
           </label>
           <label>
             {t('auth.email')}
