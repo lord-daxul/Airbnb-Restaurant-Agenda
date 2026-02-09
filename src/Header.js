@@ -45,6 +45,17 @@ function Header() {
     const demoCities = ['Caracas', 'Bogota', 'Maracaibo'];
     const searchRef = useRef(null);
     const history = useHistory();
+    const hideCityTimerRef = useRef(null);
+
+    function handleLocationInputChange(e) {
+        const v = String(e.target.value || '')
+        if (v.length === 1) {
+            const c = v.charAt(0).toLowerCase()
+            if (c === 'b') { setLocation('Bogota'); setShowCityMenu(false); return }
+            if (c === 'm') { setLocation('Maracaibo'); setShowCityMenu(false); return }
+        }
+        setLocation(v)
+    }
 
     async function detectCity() {
         if (!navigator.geolocation) {
@@ -163,7 +174,7 @@ function Header() {
                                     <SearchIcon />
                                     <input
                                         value={location}
-                                        onChange={e => setLocation(e.target.value)}
+                                        onChange={handleLocationInputChange}
                                         onKeyDown={e => { if (e.key === 'Enter') doSearch(); }}
                                         placeholder={t('search.where')}
                                     />
@@ -212,16 +223,21 @@ function Header() {
                         <div className="search-label">{t('search.where')}</div>
                         <div
                             className="where-input"
-                            onMouseEnter={() => setShowCityMenu(true)}
-                            onMouseLeave={() => setShowCityMenu(false)}
+                            onMouseEnter={() => {
+                                if (hideCityTimerRef.current) { clearTimeout(hideCityTimerRef.current); hideCityTimerRef.current = null }
+                                setShowCityMenu(true)
+                            }}
+                            onMouseLeave={() => {
+                                if (hideCityTimerRef.current) clearTimeout(hideCityTimerRef.current)
+                                hideCityTimerRef.current = setTimeout(() => { setShowCityMenu(false); hideCityTimerRef.current = null }, 220)
+                            }}
                         >
                             <RoomIcon className="where-icon" onClick={detectCity} style={{ cursor: 'pointer' }} title="Detectar ciudad" />
                             <input
                                 value={location}
-                                onChange={e=>setLocation(e.target.value)}
+                                onChange={handleLocationInputChange}
                                 onKeyDown={e=>{ if(e.key==='Enter') doSearch(); }}
-                                onFocus={() => setShowCityMenu(true)}
-                                onBlur={() => setTimeout(()=>setShowCityMenu(false), 120)}
+                                onFocus={() => { if (hideCityTimerRef.current) { clearTimeout(hideCityTimerRef.current); hideCityTimerRef.current = null } ; setShowCityMenu(true) }}
                             />
                             {showCityMenu && (
                                 <div className="city-dropdown">
