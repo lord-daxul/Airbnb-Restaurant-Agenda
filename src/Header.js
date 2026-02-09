@@ -16,7 +16,6 @@ import GroupIcon from '@material-ui/icons/Group';
 import EventIcon from '@material-ui/icons/Event';
 import SpaIcon from '@material-ui/icons/Spa';
 import RoomIcon from '@material-ui/icons/Room';
-import TuneIcon from '@material-ui/icons/Tune';
 
 function Header() {
     const { t, lang, setLang } = useTranslation();
@@ -32,7 +31,6 @@ function Header() {
         }, []);
 
         const categories = [
-            { key: 'todos', label: 'Todos', Icon: TuneIcon },
             { key: 'restaurant', label: 'category.restaurant', Icon: LocalDiningIcon },
             { key: 'cafe', label: 'category.cafe', Icon: LocalCafeIcon },
             { key: 'family', label: 'category.family', Icon: GroupIcon },
