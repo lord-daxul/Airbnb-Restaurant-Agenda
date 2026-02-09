@@ -51,6 +51,10 @@ export default function BusinessDetail({ business, tables = [] }) {
       }
     } catch (e) { url = '' }
     setCoverUrl(url || null)
+    // DEBUG: temporary log to investigate missing covers in dev
+    // Remove this after debugging
+    // eslint-disable-next-line no-console
+    console.log('BusinessDetail: cover debug', { id: business.id, cover: business.cover, coverUrl: url })
     return () => { if (objectUrl) URL.revokeObjectURL(objectUrl) }
   }, [business])
 
