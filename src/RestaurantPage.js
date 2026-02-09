@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import api from './services/api'
-import { tables as repoTables, restaurants as repoRestaurants, listings as repoListings } from './data/repoData'
+import { restaurants as repoRestaurants, listings as repoListings } from './data/repoData'
 import './SearchResult.css'
 import BusinessDetail from './BusinessDetail'
 

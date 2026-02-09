@@ -36,4 +36,6 @@ export async function register(user) {
   return request('register', { method: 'POST', body: JSON.stringify(user), headers: { 'Content-Type': 'application/json' } });
 }
 
-export default { fetchListings, fetchRestaurants, fetchRestaurant, fetchTables, fetchBookings, createBooking, fetchFavorites, toggleFavorite, fetchUsers, login, register };
+const api = { fetchListings, fetchRestaurants, fetchRestaurant, fetchTables, fetchBookings, createBooking, fetchFavorites, toggleFavorite, fetchUsers, login, register };
+
+export default api;
