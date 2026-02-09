@@ -20,23 +20,7 @@ function RestaurantPage() {
   }, [restId])
 
   useEffect(() => {
-    if (!restaurant) return
-    try {
-      const raw = localStorage.getItem('mock_tables')
-      const all = raw ? JSON.parse(raw) : (Array.isArray(repoTables) ? repoTables : [])
-      const my = (Array.isArray(all) ? all.filter(t => Number(t.restaurantId) === Number(restaurant.id)) : [])
-      const prices = []
-      my.forEach(t => { if (Array.isArray(t.slots)) t.slots.forEach(s => { if (s && s.pricePerSeat) prices.push(Number(s.pricePerSeat)) }) })
-      if (prices.length > 0) {
-        const min = Math.min(...prices)
-        const max = Math.max(...prices)
-        setPriceRangeNumeric(min === max ? { min } : { min, max })
-        setPricePerPerson(min)
-      } else {
-        setPriceRangeNumeric(null)
-        setPricePerPerson(null)
-      }
-    } catch (e) { setPricePerPerson(null) }
+    // pricing and table selection moved to BusinessDetail; keep RestaurantPage lean
   }, [restaurant])
 
   // reservation logic moved to BusinessDetail; no local handler needed
