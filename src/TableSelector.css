@@ -5,3 +5,4 @@
 .tableSelector__item.selected { border-color:#1672ff; box-shadow:0 6px 18px rgba(22,114,255,0.08) }
 .tableSelector__name { font-weight:600 }
 .tableSelector__seats { color:#666; font-size:13px }
+.tableSelector__item.disabled { opacity:0.45; cursor:not-allowed }

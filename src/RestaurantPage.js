@@ -103,10 +103,10 @@ function RestaurantPage() {
             <h3>Reservar</h3>
             <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
               <input type="date" value={selectedDate} onChange={e => setSelectedDate(e.target.value)} />
-              <input type="number" min={1} value={guests} onChange={e => setGuests(Number(e.target.value))} style={{ width: 80, padding: 8, fontWeight: 700 }} />
+              <input type="number" min={1} max={12} value={guests} onChange={e => setGuests(Math.max(1, Math.min(12, Number(e.target.value || 1))))} style={{ width: 80, padding: 8, fontWeight: 700 }} />
               <button onClick={() => { if (!selectedDate) return alert('Selecciona una fecha'); if (!selectedTable) return alert('Selecciona una mesa'); handleReserve() }} style={{ background:'#ff385c', color:'#fff', border:'none', padding:'8px 12px', borderRadius:8 }}>Reservar</button>
             </div>
-            <TableSelector tables={restaurant.tables || []} selectedId={selectedTable} onSelect={setSelectedTable} />
+            <TableSelector tables={restaurant.tables || []} selectedId={selectedTable} onSelect={setSelectedTable} guests={guests} />
           </section>
 
           <section>
