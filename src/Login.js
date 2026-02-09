@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Auth.css';
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from './i18n';
-import api from './services/api';
+// api not used in this file
 
 function Login() {
   const history = useHistory();

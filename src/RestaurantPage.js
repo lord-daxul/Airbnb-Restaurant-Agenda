@@ -9,12 +9,7 @@ function RestaurantPage() {
   const { id } = useParams()
   const restId = Number(id)
   const [restaurant, setRestaurant] = useState(null)
-  const [pricePerPerson, setPricePerPerson] = useState(null)
-  const [priceRangeNumeric, setPriceRangeNumeric] = useState(null)
-  const partySize = 2
-  const [selectedDate, setSelectedDate] = useState('')
-  const [guests, setGuests] = useState(2)
-  const [selectedTable, setSelectedTable] = useState(null)
+  // reservation UI handled in BusinessDetail; avoid unused state here
 
   useEffect(() => {
     if (!restId) return
@@ -44,15 +39,7 @@ function RestaurantPage() {
     } catch (e) { setPricePerPerson(null) }
   }, [restaurant])
 
-  function handleReserve() {
-    // demo behavior: store selection in localStorage bookings
-    const booking = { restaurantId: restaurant.id, tableId: selectedTable, date: selectedDate, guests }
-    const raw = localStorage.getItem('demo_bookings')
-    const arr = raw ? JSON.parse(raw) : []
-    arr.push(booking)
-    localStorage.setItem('demo_bookings', JSON.stringify(arr))
-    alert('Reserva demo guardada en localStorage')
-  }
+  // reservation logic moved to BusinessDetail; no local handler needed
 
   if (!restaurant) return <div style={{ padding: 32 }}>Cargando ficha...</div>
 

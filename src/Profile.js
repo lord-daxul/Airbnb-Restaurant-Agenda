@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useTranslation } from './i18n'
 
 function Profile() {
-  const { t } = useTranslation();
+  useTranslation();
   const userStr = localStorage.getItem('demo_user')
   const stored = userStr ? JSON.parse(userStr) : null
   const [user, setUser] = useState(stored)
@@ -49,11 +49,11 @@ function Profile() {
             Información sobre mí
           </li>
           <li>
-            <span style={{ marginRight: 10 }}>📅</span>
+            <span role="img" aria-label="Calendario" style={{ marginRight: 10 }}>📅</span>
             <a href="/reservas-actuales">reservas actuales</a>
           </li>
           <li>
-            <span style={{ marginRight: 10 }}>🧾</span>
+            <span role="img" aria-label="Factura" style={{ marginRight: 10 }}>🧾</span>
             <a href="/reservas-anteriores">Reservas anteriores</a>
           </li>
         </ul>
