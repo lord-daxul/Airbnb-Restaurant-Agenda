@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, Route, Switch, useRouteMatch, useHistory } from 'react-router-dom'
-import { users as repoUsers, restaurants as repoRestaurants, bookings as repoBookings } from '../data/repoData'
+import { users as repoUsers, restaurants as repoRestaurants, bookings as repoBookings, listings as repoListings } from '../data/repoData'
 import bootstrapRepoToLocalStorage from '../data/bootstrapRepoToLocalStorage'
 
 function ConfirmDialog({ open, title, message, onCancel, onConfirm }) {
@@ -119,30 +119,29 @@ function UsersTab() {
   )
 }
 
-function RestaurantsTab({ match }) {
+function BusinessesTab({ match }) {
   const [items, setItems] = useState([])
   useEffect(() => {
     try {
-      const raw = localStorage.getItem('mock_restaurants')
-      const parsed = raw ? JSON.parse(raw) : (Array.isArray(repoRestaurants) ? repoRestaurants : [])
+      const raw = localStorage.getItem('mock_listings')
+      const parsed = raw ? JSON.parse(raw) : (Array.isArray(repoListings) ? repoListings : [])
       setItems(parsed)
-    } catch (e) { setItems(Array.isArray(repoRestaurants) ? repoRestaurants : []) }
+    } catch (e) { setItems(Array.isArray(repoListings) ? repoListings : []) }
   }, [])
 
   return (
     <div className="panel-card">
-      <h3>Restaurantes</h3>
+      <h3>Negocios</h3>
       <table className="simple-table">
-        <thead><tr><th>Id</th><th>Nombre</th><th>Categoría</th><th>Ciudad</th><th>Acciones</th></tr></thead>
+        <thead><tr><th>Id</th><th>Nombre / Título</th><th>Ciudad</th><th>Acciones</th></tr></thead>
         <tbody>
           {items.map(r => (
             <tr key={r.id}>
               <td>{r.id}</td>
-              <td>{r.name}</td>
-              <td>{r.category}</td>
-              <td>{r.address?.city || '-'}</td>
+              <td>{r.name || r.title}</td>
+              <td>{(r.address?.city) || (r.location ? r.location.split(',')[0] : '-')}</td>
               <td>
-                <Link to={`${match.url}/restaurants/edit/${r.id}`}><button>Edit</button></Link>
+                <Link to={`${match.url}/negocios/edit/${r.id}`}><button>Edit</button></Link>
               </td>
             </tr>
           ))}
@@ -340,25 +339,41 @@ function EditRestaurant({ match, history }) {
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem('mock_restaurants')
-      const items = raw ? JSON.parse(raw) : (Array.isArray(repoRestaurants) ? repoRestaurants : [])
-      const r = items.find(x => Number(x.id) === id) || (Array.isArray(repoRestaurants) ? repoRestaurants.find(x => Number(x.id) === id) : null)
+      const raw = localStorage.getItem('mock_listings')
+      const items = raw ? JSON.parse(raw) : (Array.isArray(repoListings) ? repoListings : [])
+      const r = items.find(x => Number(x.id) === id) || (Array.isArray(repoListings) ? repoListings.find(x => Number(x.id) === id) : null)
       setForm(r ? { ...r } : null)
     } catch (e) { setForm(null) }
   }, [id])
 
-  if (!form) return <div style={{ padding: 20 }}>Restaurante no encontrado.</div>
+  if (!form) return <div style={{ padding: 20 }}>Negocio no encontrado.</div>
 
   function onChange(e) { setForm({ ...form, [e.target.name]: e.target.value }) }
 
   function save() {
     try {
-      const raw = localStorage.getItem('mock_restaurants')
-      const items = raw ? JSON.parse(raw) : (Array.isArray(repoRestaurants) ? repoRestaurants.slice() : [])
+      const raw = localStorage.getItem('mock_listings')
+      const items = raw ? JSON.parse(raw) : (Array.isArray(repoListings) ? repoListings.slice() : [])
       const idx = items.findIndex(x => Number(x.id) === id)
       if (idx >= 0) items[idx] = form
       else items.push(form)
-      localStorage.setItem('mock_restaurants', JSON.stringify(items))
+      localStorage.setItem('mock_listings', JSON.stringify(items))
+      // keep mock_restaurants in sync for compatibility with parts of the app
+      try {
+        const mapped = (items || []).map(l => ({
+          id: l.id,
+          name: l.name || l.title || ('Negocio ' + l.id),
+          category: l.category || 'Negocio',
+          tags: l.tags || [],
+          rating: l.rating || 0,
+          priceRange: l.price ? (`$${l.price}`) : (l.priceRange || ''),
+          description: l.description || '',
+          hours: l.hours || '',
+          address: { city: (l.address?.city) || (l.location ? String(l.location).split(',')[0].trim() : ''), state: '' },
+          cover: l.cover || ''
+        }))
+        localStorage.setItem('mock_restaurants', JSON.stringify(mapped))
+      } catch (er) { /* ignore sync errors */ }
       alert('Guardado (simulado)')
       history.push('/panel/superadmin')
     } catch (e) { alert('Error al guardar') }
@@ -366,11 +381,11 @@ function EditRestaurant({ match, history }) {
 
   return (
     <div style={{ padding: 20 }}>
-      <h3>Editar Restaurante {form.name}</h3>
+      <h3>Editar Negocio {form.name || form.title}</h3>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
         <div>
-          <label>Nombre</label>
-          <input name="name" value={form.name || ''} onChange={onChange} />
+          <label>Nombre / Título</label>
+          <input name="name" value={form.name || form.title || ''} onChange={onChange} />
         </div>
         <div>
           <label>Categoría</label>
@@ -378,7 +393,7 @@ function EditRestaurant({ match, history }) {
         </div>
         <div>
           <label>Ciudad</label>
-          <input name="city" value={form.address?.city || ''} onChange={e => setForm({ ...form, address: { ...(form.address||{}), city: e.target.value }})} />
+          <input name="city" value={(form.address?.city) || (form.location ? form.location.split(',')[0] : '')} onChange={e => setForm({ ...form, address: { ...(form.address||{}), city: e.target.value }})} />
         </div>
         <div>
           <label>Estado</label>
@@ -402,7 +417,7 @@ export default function SuperAdminPanel() {
   useEffect(() => {
     // update internal tab when route changes
     const path = history.location.pathname
-    if (path.includes('/restaurants')) setTab('restaurants')
+    if (path.includes('/negocios')) setTab('negocios')
     else if (path.includes('/reservas')) setTab('reservas')
     else if (path.includes('/pagos')) setTab('pagos')
     else setTab('users')
@@ -413,7 +428,7 @@ export default function SuperAdminPanel() {
       <h2>SuperAdmin</h2>
       <div className="panel-tabs">
         <Link to={`${base}`}><button className={tab==='users'? 'active':''}>Usuarios</button></Link>
-        <Link to={`${base}/restaurants`}><button className={tab==='restaurants'? 'active':''}>Restaurantes</button></Link>
+        <Link to={`${base}/negocios`}><button className={tab==='negocios'? 'active':''}>Negocios</button></Link>
         <Link to={`${base}/reservas`}><button className={tab==='reservas'? 'active':''}>Reservas</button></Link>
         <Link to={`${base}/pagos`}><button className={tab==='pagos'? 'active':''}>Pagos</button></Link>
       </div>
@@ -421,11 +436,11 @@ export default function SuperAdminPanel() {
       <div className="panel-body">
         <Switch>
           <Route exact path={`${base}/`} component={UsersTab} />
-          <Route exact path={`${base}/restaurants`} render={(props) => <RestaurantsTab match={match} {...props} />} />
+          <Route exact path={`${base}/negocios`} render={(props) => <BusinessesTab match={match} {...props} />} />
           <Route exact path={`${base}/reservas`} component={ReservationsTab} />
           <Route path={`${base}/reservas/edit/:id`} component={EditBooking} />
           <Route exact path={`${base}/pagos`} component={PaymentsTab} />
-          <Route path={`${base}/restaurants/edit/:id`} component={EditRestaurant} />
+          <Route path={`${base}/negocios/edit/:id`} component={EditRestaurant} />
         </Switch>
       </div>
     </div>

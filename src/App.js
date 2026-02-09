@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Home from './Home'
 import Header from './Header'
@@ -26,6 +26,12 @@ import ListingPage from './ListingPage'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
+  useEffect(() => {
+    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+      try { bootstrapRepoToLocalStorage() } catch (e) { /* ignore */ }
+    }
+  }, [])
+
   return (
 
     // BEM

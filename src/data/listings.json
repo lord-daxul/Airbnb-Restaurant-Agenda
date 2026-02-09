@@ -6,5 +6,29 @@
     "description": "Cocina venezolana contemporánea con ingredientes locales frescos.",
     "price": 30,
     "rating": 4.8
+  },
+  {
+    "id": 101,
+    "title": "La Esquina del Sabor",
+    "location": "Caracas, Distrito Capital",
+    "description": "Cocina local con énfasis en carnes y opciones saludables.",
+    "price": 30,
+    "rating": 4.6
+  },
+  {
+    "id": 102,
+    "title": "Mar y Tierra",
+    "location": "Caracas, Distrito Capital",
+    "description": "Mariscos y cortes selectos en ambiente elegante.",
+    "price": 45,
+    "rating": 4.4
+  },
+  {
+    "id": 103,
+    "title": "Sabor y Tradición",
+    "location": "Caracas, Distrito Capital",
+    "description": "Recetas tradicionales con ingredientes orgánicos.",
+    "price": 20,
+    "rating": 4.2
   }
 ]

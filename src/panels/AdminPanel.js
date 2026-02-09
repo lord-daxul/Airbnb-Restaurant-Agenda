@@ -17,7 +17,7 @@ function AdminPanel() {
       <h2>Panel Super Admin</h2>
       <div className="panel-grid">
         <div className="panel-card">
-          <h3>Restaurantes</h3>
+          <h3>Negocios</h3>
           <ul>
             {restaurants.map(r => (
               <li key={r.id}><Link to={`/panel/restaurant/${r.id}`}>{r.name}</Link></li>
