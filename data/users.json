@@ -3,10 +3,50 @@
     "id": 1,
     "name": "Juan",
     "lastname": "Pérez",
-    "email": "juan@ejemplo.com",
+    "email": "superadmin@demo.com",
+    "username": "superadmin",
+    "username": "juan",
     "password": "demo123",
     "phone": "0414-1234567",
     "state": "Distrito Capital",
     "municipality": "Libertador"
+  }
+  ,
+  {
+    "id": 2,
+    "name": "Super",
+    "email": "restaurant1@demo.com",
+    "username": "restaurant1",
+    "email": "superadmin@demo.com",
+    "password": "password0",
+    "phone": "0414-0000000",
+    "state": "Distrito Capital",
+    "municipality": "Libertador",
+    "role": "superadmin"
+  },
+  {
+    "id": 3,
+    "name": "Dueño",
+    "lastname": "La Casa",
+    "email": "restaurant2@demo.com",
+    "username": "restaurant2",
+    "password": "password1",
+    "phone": "0212-5551234",
+    "state": "Distrito Capital",
+    "municipality": "Libertador",
+    "restaurantId": 1,
+    "role": "owner"
+  },
+  {
+    "id": 4,
+    "name": "Dueño",
+    "lastname": "El Mesón",
+    "email": "restaurant2@demo.com",
+    "password": "password2",
+    "phone": "0212-5559876",
+    "state": "Miranda",
+    "municipality": "Guaicaipuro",
+    "restaurantId": 2,
+    "role": "owner"
   }
 ]

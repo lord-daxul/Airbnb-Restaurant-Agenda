@@ -28,8 +28,8 @@ export async function toggleFavorite(body) { return request('favorites', { metho
 
 export async function fetchUsers() { return request('users'); }
 
-export async function login({ email, password }) {
-  return request('login', { method: 'POST', body: JSON.stringify({ email, password }), headers: { 'Content-Type': 'application/json' } });
+export async function login({ identifier, password }) {
+  return request('login', { method: 'POST', body: JSON.stringify({ identifier, password }), headers: { 'Content-Type': 'application/json' } });
 }
 
 export async function register(user) {

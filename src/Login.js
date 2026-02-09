@@ -7,16 +7,16 @@ import api from './services/api';
 function Login() {
   const history = useHistory();
   const { t } = useTranslation();
-  const [email, setEmail] = useState('');
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
     // Call demo API
-    api.login({ email, password }).then(res => {
+    api.login({ identifier, password }).then(res => {
       if (res && res.token) {
         localStorage.setItem('demo_token', res.token);
-        localStorage.setItem('demo_user', JSON.stringify(res.user));
+          localStorage.setItem('demo_user', JSON.stringify(res.user));
         history.push('/');
       } else {
         alert(res && res.error ? res.error : 'Login failed');
@@ -30,8 +30,8 @@ function Login() {
         <h2>{t('auth.login')}</h2>
         <form onSubmit={handleSubmit} className="auth__form">
           <label>
-            {t('auth.email')}
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
+            {t('auth.email_or_username')}
+            <input type="text" value={identifier} onChange={e => setIdentifier(e.target.value)} required />
           </label>
           <label>
             {t('auth.password')}
