@@ -32,6 +32,7 @@ function Header() {
         }, []);
 
         const categories = [
+            { key: 'todos', label: 'Todos', Icon: TuneIcon },
             { key: 'restaurant', label: 'category.restaurant', Icon: LocalDiningIcon },
             { key: 'cafe', label: 'category.cafe', Icon: LocalCafeIcon },
             { key: 'family', label: 'category.family', Icon: GroupIcon },
@@ -117,7 +118,9 @@ function Header() {
     }
 
     function doSearch() {
-        const q = new URLSearchParams({ listings: selectedListing, location });
+        const q = new URLSearchParams();
+        if (selectedListing && selectedListing !== 'todos') q.set('listings', selectedListing)
+        q.set('location', location)
         history.push(`/search?${q.toString()}`);
     }
 
