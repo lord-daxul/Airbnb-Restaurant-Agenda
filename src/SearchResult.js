@@ -13,15 +13,26 @@ function SearchResult({
     total,
     partySize = 2,
 }) {
-    // price can be a preformatted string (i18n) or a numeric value per person
+    // price can be:
+    // - a preformatted string (i18n)
+    // - a numeric value per person
+    // - an object { min, max } representing a numeric range per person
     const isNumber = (v) => (typeof v === 'number' && Number.isFinite(v)) || (!isNaN(Number(v)) && String(v).trim() !== '');
     let priceDisplay = '';
     let totalDisplay = '';
 
-    if (isNumber(price) && !isNaN(Number(price))) {
+    if (price && typeof price === 'object' && (price.min !== undefined || price.max !== undefined)) {
+        const min = Number(price.min || price.max || 0)
+        const max = Number(price.max || price.min || 0)
+        if (min && max && min !== max) priceDisplay = `$${min}–$${max} / persona`
+        else priceDisplay = `$${min} / persona`
+        const rep = min || max || 0
+        const tot = rep * Number(partySize || 2)
+        totalDisplay = total || `$${tot} total (estimado para ${partySize})`
+    } else if (isNumber(price) && !isNaN(Number(price))) {
         const p = Number(price);
         priceDisplay = `$${p} / persona`;
-        const tot = p * Number(partySize || 4);
+        const tot = p * Number(partySize || 2);
         totalDisplay = total || `$${tot} total (estimado para ${partySize})`;
     } else {
         priceDisplay = price || '';

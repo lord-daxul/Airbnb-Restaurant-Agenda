@@ -27,9 +27,22 @@ function RestaurantPanel() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <div><strong>Rating:</strong> {restaurant.rating}</div>
-              { (restaurant.pricePerPerson || restaurant.priceRange) && (
-                <div><strong>Precio:</strong> {restaurant.pricePerPerson ? (`$${restaurant.pricePerPerson} / persona`) : restaurant.priceRange}</div>
-              )}
+                { (restaurant.pricePerPerson || (tables && tables.length > 0) || restaurant.priceRange) && (
+                  <div>
+                    <strong>Precio:</strong>{' '}
+                    {(() => {
+                      // prefer explicit restaurant.pricePerPerson, else compute range from tables
+                      if (restaurant.pricePerPerson) return `$${restaurant.pricePerPerson} / persona`
+                      const prices = []
+                      tables.forEach(t => { if (Array.isArray(t.slots)) t.slots.forEach(s => { if (s && s.pricePerSeat) prices.push(Number(s.pricePerSeat)) }) })
+                      if (prices.length > 0) {
+                        const min = Math.min(...prices), max = Math.max(...prices)
+                        return min !== max ? `$${min}–$${max} / persona` : `$${min} / persona`
+                      }
+                      return restaurant.priceRange
+                    })()}
+                  </div>
+                )}
             </div>
             {restaurant.rating && <div style={{ background: '#fff3ea', padding: '6px 10px', borderRadius: 8, color: '#ff6600' }}>{restaurant.rating}</div>}
           </div>

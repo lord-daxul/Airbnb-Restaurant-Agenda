@@ -9,6 +9,7 @@ function RestaurantPage() {
   const restId = Number(id)
   const [restaurant, setRestaurant] = useState(null)
   const [pricePerPerson, setPricePerPerson] = useState(null)
+  const [priceRangeNumeric, setPriceRangeNumeric] = useState(null)
   const partySize = 2
 
   useEffect(() => {
@@ -27,8 +28,15 @@ function RestaurantPage() {
       const my = (Array.isArray(all) ? all.filter(t => Number(t.restaurantId) === Number(restaurant.id)) : [])
       const prices = []
       my.forEach(t => { if (Array.isArray(t.slots)) t.slots.forEach(s => { if (s && s.pricePerSeat) prices.push(Number(s.pricePerSeat)) }) })
-      if (prices.length > 0) setPricePerPerson(Math.min(...prices))
-      else setPricePerPerson(null)
+      if (prices.length > 0) {
+        const min = Math.min(...prices)
+        const max = Math.max(...prices)
+        setPriceRangeNumeric(min === max ? { min } : { min, max })
+        setPricePerPerson(min)
+      } else {
+        setPriceRangeNumeric(null)
+        setPricePerPerson(null)
+      }
     } catch (e) { setPricePerPerson(null) }
   }, [restaurant])
 
@@ -55,8 +63,10 @@ function RestaurantPage() {
         <div style={{ textAlign: 'right' }}>
           <div style={{ background: '#fff3ea', padding: '6px 10px', borderRadius: 8, color: '#ff6600', display: 'inline-block' }}>{restaurant.rating || '—'}</div>
           <div style={{ marginTop: 8 }}>
-            <strong>{pricePerPerson ? (`$${pricePerPerson} / persona`) : (restaurant.priceRange || '')}</strong>
-            {pricePerPerson && <div style={{ fontSize: 12, color: '#666' }}>${pricePerPerson * partySize} total (estimado para {partySize})</div>}
+            <strong>{priceRangeNumeric ? (priceRangeNumeric.min && priceRangeNumeric.max ? (`$${priceRangeNumeric.min}–$${priceRangeNumeric.max} / persona`) : (`$${priceRangeNumeric.min} / persona`)) : (restaurant.pricePerPerson ? (`$${restaurant.pricePerPerson} / persona`) : (restaurant.priceRange || ''))}</strong>
+            { (priceRangeNumeric || restaurant.pricePerPerson) && (
+              <div style={{ fontSize: 12, color: '#666' }}>${(priceRangeNumeric ? (priceRangeNumeric.min || 0) : restaurant.pricePerPerson) * partySize} total (estimado para {partySize})</div>
+            )}
           </div>
         </div>
       </div>
